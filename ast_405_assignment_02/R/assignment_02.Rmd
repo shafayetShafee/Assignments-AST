@@ -1,0 +1,24 @@
+---
+output:
+  bookdown::pdf_book:
+    keep_tex: true
+    fig_height : 5
+    fig_width : 8
+    includes:
+      # in_header: ../tex_files/import.sty 
+      before_body: ../tex_files/title.sty
+documentclass: book
+classoption: oneside
+geometry: [top=1.5in, bottom=1in, right=1.1in, left=1.1in]
+linestretch: 2
+fontsize: 12pt
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+## Introduction
+
+## Methodology
