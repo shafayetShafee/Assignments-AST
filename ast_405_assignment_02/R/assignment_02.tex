@@ -4,7 +4,7 @@
 %
 \documentclass[
   12pt,
-  oneside]{book}
+  oneside]{article}
 \author{}
 \date{\vspace{-2.5em}}
 
@@ -44,7 +44,45 @@
   hidelinks,
   pdfcreator={LaTeX via pandoc}}
 \urlstyle{same} % disable monospaced font for URLs
-\usepackage[top=1.5in,bottom=1in,right=1.1in,left=1.1in]{geometry}
+\usepackage[top=2in,bottom=1in,right=1.1in,left=1.1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\newenvironment{Shaded}{}{}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{#1}}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{#1}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{#1}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
 \usepackage{longtable,booktabs,array}
 \usepackage{calc} % for calculating minipage widths
 % Correct order of tables after \paragraph or \subparagraph
@@ -71,7 +109,21 @@
 \setlength{\emergencystretch}{3em} % prevent overfull lines
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
-\setcounter{secnumdepth}{5}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{colortbl}
+\usepackage{pdflscape}
+\usepackage{tabu}
+\usepackage{threeparttable}
+\usepackage{threeparttablex}
+\usepackage[normalem]{ulem}
+\usepackage{makecell}
+\usepackage{xcolor}
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
@@ -106,10 +158,10 @@
 %----------------------------------------------------------------------------------------
 %	HEADING SECTIONS
 %----------------------------------------------------------------------------------------
-
-\textsc{\LARGE Institute of Statistical Reasearch}\\[0.3cm] % Name of your university/college
-\textsc{\LARGE and Training}\\[0.3cm]
-\textsc{\LARGE University of Dhaka}\\[0.3cm]
+%
+% \textsc{\LARGE Institute of Statistical Reasearch}\\[0.3cm] % Name of your university/college
+% \textsc{\LARGE and Training}\\[0.3cm]
+% \textsc{\LARGE University of Dhaka}\\[0.6cm]
 % Minor heading such as course title
 
 %-------------------------------------------------------------------------------
@@ -117,9 +169,10 @@
 %-------------------------------------------------------------------------------
 
 \HRule \\[0.25cm]
-{ \huge \bfseries LifeTime Data Analysis}\\[0.04cm]
-{ \large \bfseries AST 405}\\[0.04cm]
-{ \large \bfseries ASSIGNMENT-02}\\[0.03cm]
+{ \huge \bfseries Assignment-02}\\[0.04cm]
+{ \LARGE \bfseries On}\\[0.04cm]
+{ \huge \bfseries Lifetime Data Analysis}\\[0.04cm]
+{ \LARGE \bfseries AST 405}\\[0.04cm]
 \HRule \\[1.5cm]
 
 
@@ -145,7 +198,7 @@ Dr. Mahbub Latif\\Professor\\ISRT
 %	DATE SECTION
 %-------------------------------------------------------------------------------
 
-{\large \today}\\[2cm]
+{\large \today}\\[3cm]
 
 %-------------------------------------------------------------------------------
 %	LOGO SECTION
@@ -164,14 +217,424 @@ Dr. Mahbub Latif\\Professor\\ISRT
 \end{titlepage}
 
 {
-\setcounter{tocdepth}{1}
+\setcounter{tocdepth}{2}
 \tableofcontents
 }
-\setstretch{2}
-\hypertarget{introduction}{%
-\section{Introduction}\label{introduction}}
+\setstretch{1.25}
+\clearpage
 
-\hypertarget{methodology}{%
-\section{Methodology}\label{methodology}}
+\hypertarget{answers-to-questions}{%
+\section{Answers to Questions}\label{answers-to-questions}}
+
+\hypertarget{question-01}{%
+\subsection{Question 01}\label{question-01}}
+
+\begin{table}[H]
+
+\caption{\label{tab:Table-01}Descriptive Statistics}
+\centering
+\begin{tabular}[t]{lll}
+\toprule
+  & level & Overall\\
+\midrule
+n &  & 3154\\
+age (mean (SD)) &  & 46.35 (5.56)\\
+bmi (mean (SD)) &  & 24.48 (2.55)\\
+arcus (\%) & 0 & 2219 (70.4)\\
+ & 1 & 934 (29.6)\\
+\addlinespace
+ & NA & 1 ( 0.0)\\
+behpat (\%) & A1 & 275 ( 8.7)\\
+ & A2 & 1290 (40.9)\\
+ & B3 & 1236 (39.2)\\
+ & B4 & 353 (11.2)\\
+\addlinespace
+chd69 (\%) & No & 2900 (91.9)\\
+ & Yes & 254 ( 8.1)\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\hypertarget{question-02}{%
+\subsection{Question 02}\label{question-02}}
+
+\begin{table}[H]
+
+\caption{\label{tab:Table-02}Correlation Test (age, bmi) and T-test (arcus) with chol}
+\centering
+\begin{tabular}[t]{lrrr}
+\toprule
+term & estimate & statistic & p.value\\
+\midrule
+age & 0.081 & 4.550 & <.001\\
+bmi & 0.060 & 3.385 & <.001\\
+arcus & -12.672 & -7.604 & <.001\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+
+\caption{\label{tab:Table-03}One Way Analysis of Variance for chol on behpat}
+\centering
+\begin{tabular}[t]{lrrrrr}
+\toprule
+term & df & sumsq & meansq & statistic & p.value\\
+\midrule
+behpat & 3 & 30741.67 & 10247.223 & 5.475 & <.001\\
+Residuals & 3135 & 5867632.50 & 1871.653 & NA & NA\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\hypertarget{question-03}{%
+\subsection{Question 03}\label{question-03}}
+
+\begin{table}[H]
+
+\caption{\label{tab:Table-04}2x2 table with Chi-square test result}
+\centering
+\begin{tabular}[t]{lrr}
+\toprule
+\multicolumn{1}{c}{ } & \multicolumn{2}{c}{CHD} \\
+\cmidrule(l{3pt}r{3pt}){2-3}
+behpat & No & Yes\\
+\midrule
+A1 & 246 & 29\\
+A2 & 1158 & 132\\
+B3 & 1164 & 72\\
+B4 & 332 & 21\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{lr}
+\toprule
+\multicolumn{2}{c}{Pearson's Chi-squared test} \\
+\cmidrule(l{3pt}r{3pt}){1-2}
+statistic & p.value\\
+\midrule
+20.978 & <.001\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\hypertarget{question-04}{%
+\subsection{Question 04}\label{question-04}}
+
+\begin{table}[H]
+
+\caption{\label{tab:Table-05}Estimate of Model Parameters}
+\centering
+\begin{tabular}[t]{lrrrr}
+\toprule
+term & estimate & std.error & statistic & p.value\\
+\midrule
+(Intercept) & 196.971 & 6.483 & 30.381 & <.001\\
+age & 0.632 & 0.139 & 4.550 & <.001\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{equation}
+\begin{aligned}
+\operatorname{\widehat{chol}} &= 196.97 + 0.63(\operatorname{age})
+\end{aligned}
+\end{equation}
+
+\hypertarget{question-05}{%
+\subsection{Question 05}\label{question-05}}
+
+\begin{table}[H]
+
+\caption{\label{tab:Table-06}Estimate of Model Parameters}
+\centering
+\begin{tabular}[t]{lrrrr}
+\toprule
+term & estimate & std.error & statistic & p.value\\
+\midrule
+(Intercept) & 228.352 & 1.097 & 208.102 & <.001\\
+dibpatType B & -4.147 & 1.546 & -2.682 & 0.007\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{equation}
+\begin{aligned}
+\operatorname{\widehat{chol}} &= 228.35 - 4.15(\operatorname{dibpat}_{\operatorname{Type\ B}})
+\end{aligned}
+\end{equation}
+
+\hypertarget{question-06}{%
+\subsection{Question 06}\label{question-06}}
+
+\begin{table}[H]
+
+\caption{\label{tab:Table-07}Estimate of Model Parameters}
+\centering
+\begin{tabular}[t]{lrrrr}
+\toprule
+term & estimate & std.error & statistic & p.value\\
+\midrule
+(Intercept) & 235.073 & 2.618 & 89.778 & <.001\\
+behpatA2 & -8.150 & 2.883 & -2.827 & 0.005\\
+behpatB3 & -10.226 & 2.894 & -3.533 & <.001\\
+behpatB4 & -13.122 & 3.491 & -3.759 & <.001\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{equation}
+\begin{aligned}
+\operatorname{\widehat{chol}} &= 235.07 - 8.15(\operatorname{behpat}_{\operatorname{A2}}) - 10.23(\operatorname{behpat}_{\operatorname{B3}}) - 13.12(\operatorname{behpat}_{\operatorname{B4}})
+\end{aligned}
+\end{equation}
+
+\hypertarget{question-07}{%
+\subsection{Question 07}\label{question-07}}
+
+\begin{table}[H]
+
+\caption{\label{tab:Table-08}Estimate of Model Parameters}
+\centering
+\begin{tabular}[t]{lrrrr}
+\toprule
+term & estimate & std.error & statistic & p.value\\
+\midrule
+(Intercept) & 207.388 & 7.132 & 29.080 & <.001\\
+age & 0.582 & 0.140 & 4.172 & <.001\\
+behpatA2 & -7.699 & 2.878 & -2.675 & 0.008\\
+behpatB3 & -9.268 & 2.896 & -3.200 & 0.001\\
+behpatB4 & -11.841 & 3.496 & -3.387 & <.001\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{equation}
+\begin{aligned}
+\operatorname{\widehat{chol}} &= 207.39 + 0.58(\operatorname{age}) - 7.7(\operatorname{behpat}_{\operatorname{A2}}) - 9.27(\operatorname{behpat}_{\operatorname{B3}})\ - \\
+&\quad 11.84(\operatorname{behpat}_{\operatorname{B4}})
+\end{aligned}
+\end{equation}
+
+\hypertarget{question-08}{%
+\subsection{Question 08}\label{question-08}}
+
+\begin{table}[H]
+
+\caption{\label{tab:Table-09}Estimate of Model Parameters}
+\centering
+\begin{tabular}[t]{lrrrr}
+\toprule
+term & estimate & std.error & statistic & p.value\\
+\midrule
+(Intercept) & 222.252 & 1.171 & 189.755 & <.001\\
+age40 & 0.632 & 0.139 & 4.550 & <.001\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{equation}
+\begin{aligned}
+\operatorname{\widehat{chol}} &= 222.25 + 0.63(\operatorname{age40})
+\end{aligned}
+\end{equation}
+
+\begin{table}[H]
+
+\caption{\label{tab:Table-10}Estimate of Model Parameters}
+\centering
+\begin{tabular}[t]{lrrrr}
+\toprule
+term & estimate & std.error & statistic & p.value\\
+\midrule
+(Intercept) & 223.702 & 1.597 & 140.043 & <.001\\
+dibpatType B & -3.644 & 2.175 & -1.675 & 0.094\\
+smokeYes & 8.728 & 2.189 & 3.988 & <.001\\
+dibpatType B:smokeYes & 0.265 & 3.085 & 0.086 & 0.932\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{equation}
+\begin{aligned}
+\operatorname{\widehat{chol}} &= 223.7 - 3.64(\operatorname{dibpat}_{\operatorname{Type\ B}}) + 8.73(\operatorname{smoke}_{\operatorname{Yes}}) + 0.27(\operatorname{dibpat}_{\operatorname{Type\ B}} \times \operatorname{smoke}_{\operatorname{Yes}})
+\end{aligned}
+\end{equation}
+
+\clearpage
+
+\hypertarget{r-code}{%
+\section{R-code}\label{r-code}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{knitr}\SpecialCharTok{::}\NormalTok{opts\_chunk}\SpecialCharTok{$}\FunctionTok{set}\NormalTok{(}\AttributeTok{echo =} \ConstantTok{FALSE}\NormalTok{,}
+                      \AttributeTok{message =} \ConstantTok{FALSE}\NormalTok{,}
+                      \AttributeTok{warning =} \ConstantTok{FALSE}
+\NormalTok{                      )}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-} package setup {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+
+\FunctionTok{library}\NormalTok{(dplyr)}
+\FunctionTok{library}\NormalTok{(purrr)}
+\FunctionTok{library}\NormalTok{(knitr)}
+\FunctionTok{library}\NormalTok{(broom)}
+\FunctionTok{library}\NormalTok{(tableone)}
+\FunctionTok{library}\NormalTok{(kableExtra)}
+\FunctionTok{library}\NormalTok{(equatiomatic)}
+
+
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-} data setup {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+
+\FunctionTok{load}\NormalTok{(here}\SpecialCharTok{::}\FunctionTok{here}\NormalTok{(}\StringTok{"data"}\NormalTok{, }\StringTok{"wcgs.Rdata"}\NormalTok{))}
+\NormalTok{sid }\OtherTok{\textless{}{-}} \DecValTok{011}
+\FunctionTok{set.seed}\NormalTok{(sid)}
+\NormalTok{mydat }\OtherTok{\textless{}{-}} \FunctionTok{sample\_n}\NormalTok{(wcgs, }\AttributeTok{size =} \FunctionTok{n}\NormalTok{(), }\AttributeTok{replace =} \ConstantTok{TRUE}\NormalTok{)}
+
+
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-} utility functions {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+
+\NormalTok{kab\_tab }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(tab, ...) \{}
+\NormalTok{  knitr}\SpecialCharTok{::}\FunctionTok{kable}\NormalTok{(}
+\NormalTok{    tab,}
+    \AttributeTok{format =} \StringTok{"latex"}\NormalTok{, }\AttributeTok{booktabs =} \ConstantTok{TRUE}\NormalTok{,}
+    \AttributeTok{digits =} \DecValTok{3}\NormalTok{, ...}
+\NormalTok{  )}
+\NormalTok{\}}
+
+\NormalTok{p\_format }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(pval) \{}
+  \FunctionTok{ifelse}\NormalTok{(pval }\SpecialCharTok{\textless{}}\NormalTok{ .}\DecValTok{001}\NormalTok{, }\StringTok{" \textless{}.001 "}\NormalTok{, }\FunctionTok{as.character}\NormalTok{(}\FunctionTok{round}\NormalTok{(pval, }\DecValTok{3}\NormalTok{)))}
+\NormalTok{\}}
+
+\NormalTok{mod\_tab }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(mod, ...) \{}
+\NormalTok{  mod }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{tidy}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%} 
+    \FunctionTok{mutate}\NormalTok{(}\AttributeTok{p.value =} \FunctionTok{p\_format}\NormalTok{(p.value)) }\SpecialCharTok{\%\textgreater{}\%} 
+    \FunctionTok{kab\_tab}\NormalTok{(}
+      \AttributeTok{align =} \StringTok{"lrrrr"}\NormalTok{,}
+      \AttributeTok{caption =} \StringTok{"Estimate of Model Parameters"}\NormalTok{, ...}
+\NormalTok{    ) }\SpecialCharTok{\%\textgreater{}\%} 
+    \FunctionTok{kable\_styling}\NormalTok{(}\AttributeTok{latex\_options =} \StringTok{"HOLD\_position"}\NormalTok{)}
+\NormalTok{\}}
+
+\NormalTok{reg\_eq }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(mod, ...) \{}
+  \FunctionTok{extract\_eq}\NormalTok{(mod, }\AttributeTok{use\_coefs =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{intercept =} \StringTok{"beta"}\NormalTok{, }\AttributeTok{wrap =} \ConstantTok{TRUE}\NormalTok{, ...)}
+\NormalTok{\}}
+
+
+
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-} Code for Question{-}01 {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+\NormalTok{tab }\OtherTok{\textless{}{-}} \FunctionTok{CreateTableOne}\NormalTok{(}
+    \AttributeTok{data =}\NormalTok{ mydat,}
+    \AttributeTok{vars =} \FunctionTok{c}\NormalTok{(}\StringTok{"age"}\NormalTok{, }\StringTok{"bmi"}\NormalTok{, }\StringTok{"arcus"}\NormalTok{,}\StringTok{"behpat"}\NormalTok{, }\StringTok{"chd69"}\NormalTok{),}
+    \AttributeTok{factorVars =} \StringTok{"arcus"}\NormalTok{,}
+    \AttributeTok{includeNA =} \ConstantTok{TRUE}\NormalTok{,}
+    \AttributeTok{addOverall =} \ConstantTok{TRUE}
+\NormalTok{  )}
+
+\NormalTok{tab\_p }\OtherTok{\textless{}{-}} \FunctionTok{print}\NormalTok{(tab, }\AttributeTok{showAllLevels =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{printToggle =} \ConstantTok{FALSE}\NormalTok{)}
+
+\FunctionTok{kab\_tab}\NormalTok{(tab\_p, }\AttributeTok{caption =} \StringTok{"Descriptive Statistics"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{kable\_styling}\NormalTok{(}\AttributeTok{latex\_options =} \StringTok{"HOLD\_position"}\NormalTok{)}
+  
+
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-} Code for Question{-}02 {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+\NormalTok{arcus }\OtherTok{\textless{}{-}} \FunctionTok{t.test}\NormalTok{(chol }\SpecialCharTok{\textasciitilde{}}\NormalTok{ arcus, }\AttributeTok{data =}\NormalTok{ mydat) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{tidy}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{term =} \StringTok{"arcus"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{select}\NormalTok{(term, estimate, statistic, p.value)}
+
+\NormalTok{mydat }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{select}\NormalTok{(age, bmi) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{map}\NormalTok{(}\SpecialCharTok{\textasciitilde{}} \FunctionTok{cor.test}\NormalTok{(}\AttributeTok{x =}\NormalTok{ .x, }\AttributeTok{y =}\NormalTok{ mydat}\SpecialCharTok{$}\NormalTok{chol)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{map\_dfr}\NormalTok{(broom}\SpecialCharTok{::}\NormalTok{tidy, }\AttributeTok{.id =} \StringTok{"term"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{select}\NormalTok{(term}\SpecialCharTok{:}\NormalTok{p.value) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{bind\_rows}\NormalTok{(arcus) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{p.value =} \FunctionTok{p\_format}\NormalTok{(p.value)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{kab\_tab}\NormalTok{(}
+    \AttributeTok{align =} \StringTok{"lrrr"}\NormalTok{,}
+    \AttributeTok{caption =} \StringTok{"Correlation Test (age, bmi) and T{-}test (arcus) with chol"}
+\NormalTok{  ) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{kable\_styling}\NormalTok{(}\AttributeTok{latex\_options =} \StringTok{"HOLD\_position"}\NormalTok{)}
+
+
+\FunctionTok{anova}\NormalTok{(}\FunctionTok{lm}\NormalTok{(chol }\SpecialCharTok{\textasciitilde{}}\NormalTok{ behpat, }\AttributeTok{data =}\NormalTok{ mydat)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{tidy}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{p.value =} \FunctionTok{p\_format}\NormalTok{(p.value)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{kab\_tab}\NormalTok{(}
+    \AttributeTok{align =} \StringTok{"lrrrrr"}\NormalTok{,}
+    \AttributeTok{caption =} \StringTok{"One Way Analysis of Variance for chol on behpat"}
+\NormalTok{  ) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{kable\_styling}\NormalTok{(}\AttributeTok{latex\_options =} \StringTok{"HOLD\_position"}\NormalTok{)}
+
+
+
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-} Code for Question{-}03 {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+
+\NormalTok{tab\_chi }\OtherTok{\textless{}{-}}\NormalTok{ mydat }\SpecialCharTok{\%\textgreater{}\%}\NormalTok{ janitor}\SpecialCharTok{::}\FunctionTok{tabyl}\NormalTok{(behpat, chd69) }
+
+\NormalTok{tab\_chi }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{kab\_tab}\NormalTok{(}
+    \AttributeTok{align =} \StringTok{"lrr"}\NormalTok{,}
+    \AttributeTok{caption =} \StringTok{"2x2 table with Chi{-}square test result"}      
+\NormalTok{    ) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{add\_header\_above}\NormalTok{(}\AttributeTok{header =} \FunctionTok{c}\NormalTok{(}\StringTok{" "} \OtherTok{=} \DecValTok{1}\NormalTok{, }\StringTok{"CHD"} \OtherTok{=} \DecValTok{2}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{kable\_styling}\NormalTok{(}\AttributeTok{position =} \StringTok{"center"}\NormalTok{, }\AttributeTok{latex\_options =} \StringTok{"HOLD\_position"}\NormalTok{)}
+
+\NormalTok{tab\_chi }\SpecialCharTok{\%\textgreater{}\%}\NormalTok{ janitor}\SpecialCharTok{::}\FunctionTok{chisq.test}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{tidy}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{select}\NormalTok{(statistic, p.value) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{p.value =} \FunctionTok{p\_format}\NormalTok{(p.value)) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{kab\_tab}\NormalTok{(}\AttributeTok{align =} \StringTok{"lrr"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{add\_header\_above}\NormalTok{(}\AttributeTok{header =} \FunctionTok{c}\NormalTok{(}\StringTok{"Pearson\textquotesingle{}s Chi{-}squared test"} \OtherTok{=} \DecValTok{2}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{kable\_styling}\NormalTok{(}\AttributeTok{position =} \StringTok{"center"}\NormalTok{, }\AttributeTok{latex\_options =} \StringTok{"HOLD\_position"}\NormalTok{)}
+
+
+
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-} Code for Question{-}04 {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+
+\NormalTok{m1 }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(chol }\SpecialCharTok{\textasciitilde{}}\NormalTok{ age, }\AttributeTok{data =}\NormalTok{ mydat)}
+\NormalTok{m1 }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{mod\_tab}\NormalTok{()}
+\FunctionTok{reg\_eq}\NormalTok{(m1)}
+
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-} Code for Question{-}05 {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+
+\NormalTok{m2 }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(chol }\SpecialCharTok{\textasciitilde{}}\NormalTok{ dibpat, }\AttributeTok{data =}\NormalTok{ mydat)}
+\NormalTok{m2 }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{mod\_tab}\NormalTok{()}
+
+\FunctionTok{reg\_eq}\NormalTok{(m2)}
+
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-} Code for Question{-}05 {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+
+\NormalTok{m3 }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(chol }\SpecialCharTok{\textasciitilde{}}\NormalTok{ behpat, }\AttributeTok{data =}\NormalTok{ mydat)}
+\NormalTok{m3 }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{mod\_tab}\NormalTok{()}
+
+\FunctionTok{reg\_eq}\NormalTok{(m3)}
+
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-} Code for Question{-}08 {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+
+\NormalTok{m4 }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(chol }\SpecialCharTok{\textasciitilde{}}\NormalTok{ age }\SpecialCharTok{+}\NormalTok{ behpat, }\AttributeTok{data =}\NormalTok{ mydat)}
+\NormalTok{m4 }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{mod\_tab}\NormalTok{()}
+
+\FunctionTok{reg\_eq}\NormalTok{(m4)}
+
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-} Code for Question{-}08 {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+
+\NormalTok{mydat }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{age40 =}\NormalTok{ age }\SpecialCharTok{{-}} \DecValTok{40}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{lm}\NormalTok{(chol }\SpecialCharTok{\textasciitilde{}}\NormalTok{ age40, }\AttributeTok{data =}\NormalTok{ .) }\OtherTok{{-}\textgreater{}}\NormalTok{ m5}
+
+\NormalTok{m5 }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{mod\_tab}\NormalTok{()}
+
+\FunctionTok{reg\_eq}\NormalTok{(m5)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-} Code for Question{-}08 {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+
+\NormalTok{m6 }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(chol }\SpecialCharTok{\textasciitilde{}}\NormalTok{ dibpat }\SpecialCharTok{*}\NormalTok{ smoke, }\AttributeTok{data =}\NormalTok{ mydat)}
+\NormalTok{m6 }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{mod\_tab}\NormalTok{()}
+\FunctionTok{reg\_eq}\NormalTok{(m6)}
+\end{Highlighting}
+\end{Shaded}
+
 
 \end{document}

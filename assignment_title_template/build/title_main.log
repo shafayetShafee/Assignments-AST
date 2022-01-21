@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2022.1.19)  19 JAN 2022 17:33
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2022.1.19)  21 JAN 2022 21:25
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -124,14 +124,14 @@ LaTeX Font Info:    ... okay on input line 10.
 * layoutoffset:(h,v)=(0.0pt,0.0pt)
 * modes: 
 * h-part:(L,W,R)=(79.49744pt, 455.30013pt, 79.49744pt)
-* v-part:(T,H,B)=(108.405pt, 614.295pt, 72.26999pt)
+* v-part:(T,H,B)=(144.54pt, 578.16pt, 72.26999pt)
 * \paperwidth=614.295pt
 * \paperheight=794.96999pt
 * \textwidth=455.30013pt
-* \textheight=614.295pt
+* \textheight=578.16pt
 * \oddsidemargin=7.22745pt
 * \evensidemargin=7.22745pt
-* \topmargin=-0.86499pt
+* \topmargin=35.27pt
 * \headheight=12.0pt
 * \headsep=25.0pt
 * \topskip=12.0pt
@@ -158,32 +158,32 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 48
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 ))
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <12> on input line 47.
+(Font)              <12> on input line 48.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 47.
+(Font)              <8> on input line 48.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 47.
+(Font)              <6> on input line 48.
 <logo.JPG, id=1, 161.85469pt x 200.24812pt>
 File: logo.JPG Graphic file (type jpg)
 <use logo.JPG>
-Package pdftex.def Info: logo.JPG  used on input line 68.
+Package pdftex.def Info: logo.JPG  used on input line 69.
 (pdftex.def)             Requested size: 113.81119pt x 147.96129pt.
  [1
 
 {c:/Users/ASUS/AppData/Roaming/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map} <./logo.JPG>] (build/title_main.aux) ) 
 Here is how much of TeX's memory you used:
- 2771 strings out of 480246
- 48829 string characters out of 5894533
- 361988 words of memory out of 5000000
- 20712 multiletter control sequences out of 15000+600000
- 474155 words of font info for 44 fonts, out of 8000000 for 9000
+ 2768 strings out of 480246
+ 48797 string characters out of 5894533
+ 361970 words of memory out of 5000000
+ 20710 multiletter control sequences out of 15000+600000
+ 473852 words of font info for 43 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 55i,6n,62p,331b,299s stack positions out of 5000i,500n,10000p,200000b,80000s
-<c:/Users/ASUS/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><c:/Users/ASUS/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><c:/Users/ASUS/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><c:/Users/ASUS/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb>
-Output written on build/title_main.pdf (1 page, 70633 bytes).
+ 55i,6n,62p,331b,295s stack positions out of 5000i,500n,10000p,200000b,80000s
+<c:/Users/ASUS/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><c:/Users/ASUS/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><c:/Users/ASUS/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb>
+Output written on build/title_main.pdf (1 page, 56725 bytes).
 PDF statistics:
- 29 PDF objects out of 1000 (max. 8388607)
- 16 compressed objects within 1 object stream
+ 24 PDF objects out of 1000 (max. 8388607)
+ 13 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  6 words of extra memory for PDF output out of 10000 (max. 10000000)
 

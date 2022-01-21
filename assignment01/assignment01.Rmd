@@ -1,0 +1,122 @@
+---
+title: "Assignment on 405"
+author: "shafayet"
+date: "12/6/2021"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,
+                      message = FALSE,
+                      warning = FALSE
+                      )
+```
+
+
+## Data Loading and Initial Setup
+```{r data, echo=FALSE}
+library(tidyverse)
+library(janitor)
+library(broom)
+
+load("wcgs.Rdata")
+sid <- 011
+set.seed(sid)
+mydat <- sample_n(wcgs, size = n(), replace = TRUE)
+```
+
+
+## Question 01
+
+```{r ques 01}
+mydat %>% 
+  summarize(
+    across(c(age, bmi), list(mean = mean, sd = sd))
+    )
+
+mydat %>%
+  select(arcus, behpat, chd69) %>% 
+  map(tabyl) %>% 
+  map(adorn_pct_formatting, digits=3)
+  
+```
+
+## Question 02
+
+```{r ques02}
+mydat %>% 
+  select(age, bmi) %>% 
+  map(~cor.test(x = .x, y = mydat$chol)) %>% 
+  map_dfr(broom::tidy, .id = "correlation") %>% 
+  select(correlation:p.value)
+
+mydat %>% group_by(arcus) %>% summarise(variance = var(chol, na.rm = T))
+
+t.test(chol~arcus, data = mydat) %>% 
+  broom::tidy() %>% 
+  select(estimate1:p.value)
+
+oneway.test(chol ~ behpat, data = mydat, var.equal = TRUE)
+anova(lm(chol ~ behpat, data = mydat))
+```
+
+## Question 03
+
+```{r question-03}
+
+mydat %>% tabyl(behpat, chd69) %>% janitor::chisq.test()
+
+# chisq.test(mydat$behpat, mydat$chd69)
+
+```
+
+## Question 04-06
+
+```{r question 4 5 6}
+mydat %>% 
+  select(age, dibpat, behpat) %>% 
+  map(~lm(mydat$chol ~ .x))
+
+```
+
+## Question 07
+```{r question-07}
+model07 = lm(chol ~ age + dibpat, data=mydat)
+
+model07
+
+model07 %>% broom::glance() %>% select(r.squared:sigma)
+
+mydat %>% 
+  select(age, dibpat) %>% 
+  map(~broom::glance(lm(mydat$chol ~ .x)))
+
+```
+
+
+```{r question-08}
+lm(chol ~ age, data=mydat)
+
+mydat %>% 
+  mutate(
+    age40 = age - 40
+  ) %>% 
+  lm(chol ~ age40, data=.)
+
+```
+
+
+```{r ques 09}
+mydat %>% 
+  select(smoke, dibpat, chol) %>% 
+  nest(data = -smoke) %>% 
+  mutate(
+    fit = map(data, ~ lm(chol ~ dibpat, data = .x)),
+    tidied = map(fit, broom::tidy)
+  ) %>% 
+  unnest(tidied) %>% 
+  select(-c(data, fit))
+
+```
+
+

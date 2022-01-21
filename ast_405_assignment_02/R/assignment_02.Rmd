@@ -1,24 +1,279 @@
 ---
 output:
   bookdown::pdf_book:
+    highlight: pygments
+    toc: true
+    toc_depth: 2
+    lot: true
     keep_tex: true
+    number_sections: no
     fig_height : 5
     fig_width : 8
     includes:
       # in_header: ../tex_files/import.sty 
       before_body: ../tex_files/title.sty
-documentclass: book
+documentclass: article
 classoption: oneside
-geometry: [top=1.5in, bottom=1in, right=1.1in, left=1.1in]
-linestretch: 2
+geometry: [top=2in, bottom=1in, right=1.1in, left=1.1in]
+linestretch: 1.25
 fontsize: 12pt
 ---
 
+
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = FALSE,
+                      message = FALSE,
+                      warning = FALSE
+                      )
+```
+
+\clearpage
+
+```{r analysis-setup}
+## ------- package setup ------------------------
+
+library(dplyr)
+library(purrr)
+library(knitr)
+library(broom)
+library(tableone)
+library(kableExtra)
+library(equatiomatic)
+
+
+## ------- data setup ------------------------
+
+load(here::here("data", "wcgs.Rdata"))
+sid <- 011
+set.seed(sid)
+mydat <- sample_n(wcgs, size = n(), replace = TRUE)
+
+
+## ------- utility functions ------------------------
+
+kab_tab <- function(tab, ...) {
+  knitr::kable(
+    tab,
+    format = "latex", booktabs = TRUE,
+    digits = 3, ...
+  )
+}
+
+p_format <- function(pval) {
+  ifelse(pval < .001, " <.001 ", as.character(round(pval, 3)))
+}
+
+mod_tab <- function(mod, ...) {
+  mod %>% tidy() %>% 
+    mutate(p.value = p_format(p.value)) %>% 
+    kab_tab(
+      align = "lrrrr",
+      caption = "Estimate of Model Parameters", ...
+    ) %>% 
+    kable_styling(latex_options = "HOLD_position")
+}
+
+reg_eq <- function(mod, ...) {
+  extract_eq(mod, use_coefs = TRUE, intercept = "beta", wrap = TRUE, ...)
+}
+
+
+```
+
+# Answers to Questions
+## Question 01
+
+```{r Table-01}
+
+## ------- Code for Question-01 ------------------------
+tab <- CreateTableOne(
+    data = mydat,
+    vars = c("age", "bmi", "arcus","behpat", "chd69"),
+    factorVars = "arcus",
+    includeNA = TRUE,
+    addOverall = TRUE
+  )
+
+tab_p <- print(tab, showAllLevels = TRUE, printToggle = FALSE)
+
+kab_tab(tab_p, caption = "Descriptive Statistics") %>% 
+  kable_styling(latex_options = "HOLD_position")
+  
+```
+
+## Question 02
+
+```{r Table-02}
+
+## ------- Code for Question-02 ------------------------
+arcus <- t.test(chol ~ arcus, data = mydat) %>%
+  tidy() %>%
+  mutate(term = "arcus") %>%
+  select(term, estimate, statistic, p.value)
+
+mydat %>%
+  select(age, bmi) %>%
+  map(~ cor.test(x = .x, y = mydat$chol)) %>%
+  map_dfr(broom::tidy, .id = "term") %>%
+  select(term:p.value) %>%
+  bind_rows(arcus) %>%
+  mutate(p.value = p_format(p.value)) %>%
+  kab_tab(
+    align = "lrrr",
+    caption = "Correlation Test (age, bmi) and T-test (arcus) with chol"
+  ) %>% 
+  kable_styling(latex_options = "HOLD_position")
+
+```
+
+<!-- \@ref(Table-02) -->
+
+```{r Table-03}
+
+anova(lm(chol ~ behpat, data = mydat)) %>%
+  tidy() %>%
+  mutate(p.value = p_format(p.value)) %>%
+  kab_tab(
+    align = "lrrrrr",
+    caption = "One Way Analysis of Variance for chol on behpat"
+  ) %>% 
+  kable_styling(latex_options = "HOLD_position")
+
+
 ```
 
 
-## Introduction
+## Question 03
 
-## Methodology
+```{r Table-04}
+
+## ------- Code for Question-03 ------------------------
+
+tab_chi <- mydat %>% janitor::tabyl(behpat, chd69) 
+
+tab_chi %>% 
+  kab_tab(
+    align = "lrr",
+    caption = "2x2 table with Chi-square test result"      
+    ) %>% 
+  add_header_above(header = c(" " = 1, "CHD" = 2)) %>% 
+  kable_styling(position = "center", latex_options = "HOLD_position")
+
+tab_chi %>% janitor::chisq.test() %>% 
+  tidy() %>% 
+  select(statistic, p.value) %>% 
+  mutate(p.value = p_format(p.value)) %>% 
+  kab_tab(align = "lrr") %>% 
+  add_header_above(header = c("Pearson's Chi-squared test" = 2)) %>% 
+  kable_styling(position = "center", latex_options = "HOLD_position")
+
+
+```
+
+
+## Question 04
+
+```{r Table-05}
+
+## ------- Code for Question-04 ------------------------
+
+m1 <- lm(chol ~ age, data = mydat)
+m1 %>% mod_tab()
+```
+
+```{r eq01, results = "asis"}
+reg_eq(m1)
+```
+
+
+
+## Question 05
+```{r Table-06}
+
+## ------- Code for Question-05 ------------------------
+
+m2 <- lm(chol ~ dibpat, data = mydat)
+m2 %>% mod_tab()
+
+```
+
+
+```{r eq02, results = "asis"}
+reg_eq(m2)
+```
+
+
+
+## Question 06
+```{r Table-07}
+
+## ------- Code for Question-05 ------------------------
+
+m3 <- lm(chol ~ behpat, data = mydat)
+m3 %>% mod_tab()
+
+```
+
+
+```{r eq03, results = "asis"}
+reg_eq(m3)
+```
+
+
+
+## Question 07
+```{r Table-08}
+
+## ------- Code for Question-08 ------------------------
+
+m4 <- lm(chol ~ age + behpat, data = mydat)
+m4 %>% mod_tab()
+
+```
+
+
+```{r eq04, results = "asis"}
+reg_eq(m4)
+```
+
+
+
+## Question 08
+```{r Table-09}
+
+## ------- Code for Question-08 ------------------------
+
+mydat %>% 
+  mutate(age40 = age - 40) %>% 
+  lm(chol ~ age40, data = .) -> m5
+
+m5 %>% mod_tab()
+
+```
+
+
+```{r eq05, results = "asis"}
+reg_eq(m5)
+```
+
+
+```{r Table-10}
+## ------- Code for Question-08 ------------------------
+
+m6 <- lm(chol ~ dibpat * smoke, data = mydat)
+m6 %>% mod_tab()
+```
+
+
+```{r eq06, results = "asis"}
+reg_eq(m6)
+```
+
+
+\clearpage
+
+# R-code
+```{r show-code, ref.label=all_labels(), echo = TRUE, eval=FALSE}
+
+```
+
