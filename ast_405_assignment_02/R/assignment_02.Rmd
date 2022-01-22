@@ -1,4 +1,8 @@
 ---
+knit: (function(inputFile, encoding) {
+      rmarkdown::render(inputFile, 
+                        encoding = encoding, 
+                        output_dir = here::here("output_pdf")) }) 
 output:
   bookdown::pdf_book:
     highlight: pygments
@@ -14,22 +18,24 @@ output:
       before_body: ../tex_files/title.sty
 documentclass: article
 classoption: oneside
-geometry: [top=2in, bottom=1in, right=1.1in, left=1.1in]
+geometry: [top=1.1in, bottom=1in, right=1.1in, left=1.1in]
 linestretch: 1.25
 fontsize: 12pt
 ---
 
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE,
-                      message = FALSE,
-                      warning = FALSE
-                      )
+knitr::opts_chunk$set(
+  echo = FALSE,
+  message = FALSE,
+  warning = FALSE
+)
 ```
 
 \clearpage
 
 ```{r analysis-setup}
+
 ## ------- package setup ------------------------
 
 library(dplyr)
@@ -52,60 +58,95 @@ mydat <- sample_n(wcgs, size = n(), replace = TRUE)
 ## ------- utility functions ------------------------
 
 kab_tab <- function(tab, ...) {
-  knitr::kable(
-    tab,
-    format = "latex", booktabs = TRUE,
-    digits = 3, ...
-  )
+  knitr::kable(tab,
+               format = "latex",
+               booktabs = TRUE,
+               digits = 3,
+               ...)
 }
 
 p_format <- function(pval) {
-  ifelse(pval < .001, " <.001 ", as.character(round(pval, 3)))
+  ifelse(pval < .001, "$<.001$", as.character(round(pval, 3)))
 }
 
 mod_tab <- function(mod, ...) {
-  mod %>% tidy() %>% 
-    mutate(p.value = p_format(p.value)) %>% 
-    kab_tab(
-      align = "lrrrr",
-      caption = "Estimate of Model Parameters", ...
-    ) %>% 
+  mod %>%
+    tidy() %>%
+    mutate(p.value = p_format(p.value)) %>%
+    kab_tab(align = "lrrrr",
+            caption = "Estimate of Model Parameters", ...) %>%
     kable_styling(latex_options = "HOLD_position")
 }
 
 reg_eq <- function(mod, ...) {
-  extract_eq(mod, use_coefs = TRUE, intercept = "beta", wrap = TRUE, ...)
+  extract_eq(mod,
+             use_coefs = TRUE,
+             intercept = "beta",
+             wrap = TRUE,
+             ...)
 }
 
+mod_params <- function(mod, param, dec = 2) {
+  round(mod$coefficients[[param]], dec)
+}
 
 ```
 
 # Answers to Questions
 ## Question 01
+**Answer:** For the continuous variables, `age` and `bmi` mean and standard deviation (SD) is obtained. And for categorical variable, `arcus`, `behpat` and `chd69` frequency and proportion (in percentage) is obtained as descriptive statistics, which are shown in the following table:
 
 ```{r Table-01}
 
 ## ------- Code for Question-01 ------------------------
+
 tab <- CreateTableOne(
-    data = mydat,
-    vars = c("age", "bmi", "arcus","behpat", "chd69"),
-    factorVars = "arcus",
-    includeNA = TRUE,
-    addOverall = TRUE
-  )
+  data = mydat,
+  vars = c("age", "bmi", "arcus", "behpat", "chd69"),
+  factorVars = "arcus",
+  addOverall = TRUE
+)
 
 tab_p <- print(tab, showAllLevels = TRUE, printToggle = FALSE)
 
-kab_tab(tab_p, caption = "Descriptive Statistics") %>% 
+kab_tab(tab_p, caption = "Descriptive Statistics") %>%
   kable_styling(latex_options = "HOLD_position")
-  
+
 ```
 
+\clearpage
+
 ## Question 02
+**Answer:** 
+
+#### Effect of age and bmi
+To check whether each of `age` and `bmi` has significant effect on `chol`, we need to do correlation test (pearson).
+
+For each correlation test of `age` and `bmi` with `chol`, the hypotheses are,
+\begin{align*}
+H_o&: \rho = 0 \\
+H_a&: \rho \neq 0
+\end{align*}
+where $\rho$ is the poputlation correlation coefficient.
+
+The appropriate test statistic for testing the hypothesis is,
+
+$$
+t_o = \frac{r\sqrt{n-2}}{\sqrt{1-r^2}}
+$$
+
+where $r$ is the sample correlation coefficient and $t_o$ follows $t_{n-2}$ 
+distribution under $H_o$.
+
+Here we will reject $H_o$ if the associated `p value` is less then  $\alpha = 0.05$, where $\alpha$ is the level of significance.
+
+Now from Table: \@ref(tab:Table-02), we can see that both of the variables `age` and `bmi`
+is significantly associated with `chol` variable.
 
 ```{r Table-02}
 
 ## ------- Code for Question-02 ------------------------
+
 arcus <- t.test(chol ~ arcus, data = mydat) %>%
   tidy() %>%
   mutate(term = "arcus") %>%
@@ -118,77 +159,139 @@ mydat %>%
   select(term:p.value) %>%
   bind_rows(arcus) %>%
   mutate(p.value = p_format(p.value)) %>%
-  kab_tab(
-    align = "lrrr",
-    caption = "Correlation Test (age, bmi) and T-test (arcus) with chol"
-  ) %>% 
+  kab_tab(align = "lrrr",
+          escape = FALSE,
+          caption = "Correlation Test (age, bmi) and T-test (arcus) with chol") %>%
   kable_styling(latex_options = "HOLD_position")
 
 ```
 
-<!-- \@ref(Table-02) -->
+#### Effect of arcus
+Now to check the effect of `arcus` (a categorical variable with level 0 and 1) on `chol`, we can do two sample t-test, where one sample is people with `arcus` 0 and 
+other sample is people with `arcus` 1. Therefore, is $\mu_o$ and $\mu_1$ are the 
+population mean of arcus 0 and arcus 1 group respectively. 
+
+Then our hypotheses are:
+\begin{align*}
+H_o&: \mu_o = \mu_1 \\
+H_a&: \mu_o \neq \mu_1
+\end{align*}
+and appropriate test statistic (assuming unequal variance),
+
+$$
+t_o = \frac{\bar{x_o} - \bar{x_1}}{\sqrt{\frac{s_o^2}{n_o} + \frac{s_1^2}{n_1}}}
+$$
+
+where $\bar{x}$ and $s^2$ denotes sample mean and sample variance with subscript 
+0 and 1 for `arcus` group 0 and 1 respectively and $n_o$ and $n_1$ are the corresponding sample sizes.
+
+Here we will reject $H_o$ if the associated `p value` is less then  $\alpha = 0.05$, where $\alpha$ is the level of significance.
+
+Then from Table: \@ref(tab:Table-02), since `p.value` is less than 0.001 we can conclude that mean `chol` differs significantly for 0 and 1 group of `arcus`, that is, `arcus` has significant effect on `chol`.
+
+#### Effect of behpat
+
+To check the effect of `behpat` on `chol`, we can do oneway ANOVA. In this case the hypotheses are:
+\begin{align*}
+H_o&: \mu_1 = \mu_2 \\
+H_a&: \mu_i \neq \mu_j \! &\text{for at least on i $\ne$ j}
+\end{align*}
+and test statistic is $F_o = \frac{MS_{reg}}{MS_{E}}$. We will reject $H_o$ if associated `p.value` is less than 0.05.
 
 ```{r Table-03}
 
 anova(lm(chol ~ behpat, data = mydat)) %>%
   tidy() %>%
   mutate(p.value = p_format(p.value)) %>%
-  kab_tab(
-    align = "lrrrrr",
-    caption = "One Way Analysis of Variance for chol on behpat"
-  ) %>% 
+  kab_tab(align = "lrrrrr",
+          escape = FALSE,
+          caption = "One Way Analysis of Variance for chol on behpat") %>%
   kable_styling(latex_options = "HOLD_position")
-
 
 ```
 
+Then from Table: \@ref(tab:Table-03), we conclude that mean `chol` differs significantly over the levels of `behpat`.
+
+\clearpage
 
 ## Question 03
 
-```{r Table-04}
+**Answer:** To examine the association between `behat`  and `chd69`, the hypotheses are:
+\begin{align*}
+H_o&: \text{There's no association between \texttt{behpat} and \texttt{chd69}.} \\
+H_a&: \text{There's association between \texttt{behpat} and \texttt{chd69}.}
+\end{align*}
+Here, the test statistics is:
+$$
+\chi^2 = \sum_{i=1}^{r}\sum_{j=1}^{c}\frac{(O_{ij} - E_{ij})^2}{E_{ij}}
+$$
+Where, $O_{ij}$ is observed frequency and $E_{ij}$ is the expected frequency and $r$, $c$ is the row and column number of contingency table \ref{Table-04}
+
+Here, we would reject $H_o$ if associated `p.value` corresponding to test statistics
+is less the 0.05.
+
+```{r Table-04-05}
 
 ## ------- Code for Question-03 ------------------------
 
-tab_chi <- mydat %>% janitor::tabyl(behpat, chd69) 
+df_cont <- mydat %>% janitor::tabyl(behpat, chd69)
 
-tab_chi %>% 
-  kab_tab(
-    align = "lrr",
-    caption = "2x2 table with Chi-square test result"      
-    ) %>% 
-  add_header_above(header = c(" " = 1, "CHD" = 2)) %>% 
-  kable_styling(position = "center", latex_options = "HOLD_position")
+tab_cont <- df_cont %>%
+  kab_tab() %>%
+  add_header_above(header = c(" " = 1, "CHD" = 2))
 
-tab_chi %>% janitor::chisq.test() %>% 
-  tidy() %>% 
-  select(statistic, p.value) %>% 
-  mutate(p.value = p_format(p.value)) %>% 
-  kab_tab(align = "lrr") %>% 
-  add_header_above(header = c("Pearson's Chi-squared test" = 2)) %>% 
-  kable_styling(position = "center", latex_options = "HOLD_position")
+tab_chi <- df_cont %>%
+  janitor::chisq.test() %>%
+  tidy() %>%
+  select(statistic, p.value) %>%
+  mutate(p.value = p_format(p.value)) %>%
+  kab_tab(escape = FALSE)
 
-
+tab_side <- c(
+    "\\begin{table}[H]
+      \\begin{minipage}{.5\\linewidth}
+      \\centering",
+      tab_cont,
+      "\\caption{Contingency table}
+      \\label{Table-04}
+    \\end{minipage}%
+      \\begin{minipage}{.5\\linewidth}
+        \\centering",
+    tab_chi,
+    "\\caption{chi-square test}
+    \\label{Table-05}
+    \\end{minipage}
+      \\end{table}"
+  )
 ```
 
+`r paste0(tab_side, collapse="")`
+
+Now from the Table \ref{Table-05}, since `p.value` is less than 0.001, we can conclude that there's an significant association between `behpat` and `chd69`.
+
+\clearpage
 
 ## Question 04
 
-```{r Table-05}
+```{r Table-06}
 
 ## ------- Code for Question-04 ------------------------
 
 m1 <- lm(chol ~ age, data = mydat)
 m1 %>% mod_tab()
+
 ```
 
+**Answer:** The fitted regression line is:
 ```{r eq01, results = "asis"}
 reg_eq(m1)
 ```
-
+Then, the cholesterol level is expected to increase by `r mod_params(m1, 2)` units
+for 1-year increase of age.
 
 
 ## Question 05
-```{r Table-06}
+```{r Table-07}
 
 ## ------- Code for Question-05 ------------------------
 
@@ -197,15 +300,15 @@ m2 %>% mod_tab()
 
 ```
 
-
-```{r eq02, results = "asis"}
+**Answer:** The fitted regression line is:
+```{r eq02}
 reg_eq(m2)
 ```
-
+So, we can say that, Mean cholesterol level of `Type A dibpat` subjects is `r mod_params(m2, 1)`. Also, mean cholesterol level of `Type A dibpat` subjects is `r mod_params(m2, 2)` unit higher than `Type B dibpat` subjects.
 
 
 ## Question 06
-```{r Table-07}
+```{r Table-08}
 
 ## ------- Code for Question-05 ------------------------
 
@@ -222,7 +325,7 @@ reg_eq(m3)
 
 
 ## Question 07
-```{r Table-08}
+```{r Table-09}
 
 ## ------- Code for Question-08 ------------------------
 
@@ -239,12 +342,13 @@ reg_eq(m4)
 
 
 ## Question 08
-```{r Table-09}
+
+```{r Table-10}
 
 ## ------- Code for Question-08 ------------------------
 
-mydat %>% 
-  mutate(age40 = age - 40) %>% 
+mydat %>%
+  mutate(age40 = age - 40) %>%
   lm(chol ~ age40, data = .) -> m5
 
 m5 %>% mod_tab()
@@ -257,7 +361,7 @@ reg_eq(m5)
 ```
 
 
-```{r Table-10}
+```{r Table-11}
 ## ------- Code for Question-08 ------------------------
 
 m6 <- lm(chol ~ dibpat * smoke, data = mydat)

@@ -44,7 +44,7 @@
   hidelinks,
   pdfcreator={LaTeX via pandoc}}
 \urlstyle{same} % disable monospaced font for URLs
-\usepackage[top=2in,bottom=1in,right=1.1in,left=1.1in]{geometry}
+\usepackage[top=1.1in,bottom=1in,right=1.1in,left=1.1in]{geometry}
 \usepackage{color}
 \usepackage{fancyvrb}
 \newcommand{\VerbBar}{|}
@@ -168,13 +168,17 @@
 %	TITLE SECTION
 %-------------------------------------------------------------------------------
 
-\HRule \\[0.25cm]
-{ \huge \bfseries Assignment-02}\\[0.04cm]
-{ \LARGE \bfseries On}\\[0.04cm]
-{ \huge \bfseries Lifetime Data Analysis}\\[0.04cm]
-{ \LARGE \bfseries AST 405}\\[0.04cm]
-\HRule \\[1.5cm]
+\begin{minipage}{3cm}
+\vspace{3cm}
+\end{minipage}
 
+
+\HRule \\[0.25cm]
+{ \huge \bfseries Assignment-02}\\[0.06cm]
+{ \huge \bfseries On}\\[0.1cm]
+{ \huge \bfseries Lifetime Data Analysis}\\[0.08cm]
+{ \LARGE \bfseries AST 405}\\[0.05cm]
+\HRule \\[1.5cm]
 
 %-------------------------------------------------------------------------------
 %	AUTHOR SECTION
@@ -190,7 +194,7 @@ Shafayet Khan Shafee \\FH-033-011\\4th Year
 \begin{minipage}{0.4\textwidth}
 \begin{flushright} \large
 \emph{Submitted To:} \\
-Dr. Mahbub Latif\\Professor\\ISRT
+Dr. Mahbub Latif\\Professor\\ISRT, DU
 \end{flushright}
 \end{minipage}\\[1cm]
 
@@ -206,7 +210,7 @@ Dr. Mahbub Latif\\Professor\\ISRT
 
 \begin{figure}[hb]
   \centering
-  \includegraphics[width=4cm, height=5.2cm]{../others/logo.JPG}
+  \includegraphics[width=4cm, height=5.2cm]{../others/du_logo_high.JPG}
 \end{figure}
 
 
@@ -229,6 +233,8 @@ Dr. Mahbub Latif\\Professor\\ISRT
 \hypertarget{question-01}{%
 \subsection{Question 01}\label{question-01}}
 
+\textbf{Answer:} For the continuous variables, \texttt{age} and \texttt{bmi} mean and standard deviation (SD) is obtained. And for categorical variable, \texttt{arcus}, \texttt{behpat} and \texttt{chd69} frequency and proportion (in percentage) is obtained as descriptive statistics, which are shown in the following table:
+
 \begin{table}[H]
 
 \caption{\label{tab:Table-01}Descriptive Statistics}
@@ -243,20 +249,49 @@ bmi (mean (SD)) &  & 24.48 (2.55)\\
 arcus (\%) & 0 & 2219 (70.4)\\
  & 1 & 934 (29.6)\\
 \addlinespace
- & NA & 1 ( 0.0)\\
 behpat (\%) & A1 & 275 ( 8.7)\\
  & A2 & 1290 (40.9)\\
  & B3 & 1236 (39.2)\\
  & B4 & 353 (11.2)\\
-\addlinespace
 chd69 (\%) & No & 2900 (91.9)\\
+\addlinespace
  & Yes & 254 ( 8.1)\\
 \bottomrule
 \end{tabular}
 \end{table}
 
+\clearpage
+
 \hypertarget{question-02}{%
 \subsection{Question 02}\label{question-02}}
+
+\textbf{Answer:}
+
+\hypertarget{effect-of-age-and-bmi}{%
+\paragraph{Effect of age and bmi}\label{effect-of-age-and-bmi}}
+
+To check whether each of \texttt{age} and \texttt{bmi} has significant effect on \texttt{chol}, we need to do correlation test (pearson).
+
+For each correlation test of \texttt{age} and \texttt{bmi} with \texttt{chol}, the hypotheses are,
+\begin{align*}
+H_o&: \rho = 0 \\
+H_a&: \rho \neq 0
+\end{align*}
+where \(\rho\) is the poputlation correlation coefficient.
+
+The appropriate test statistic for testing the hypothesis is,
+
+\[
+t_o = \frac{r\sqrt{n-2}}{\sqrt{1-r^2}}
+\]
+
+where \(r\) is the sample correlation coefficient and \(t_o\) follows \(t_{n-2}\)
+distribution under \(H_o\).
+
+Here we will reject \(H_o\) if the associated \texttt{p\ value} is less then \(\alpha = 0.05\), where \(\alpha\) is the level of significance.
+
+Now from Table: \ref{tab:Table-02}, we can see that both of the variables \texttt{age} and \texttt{bmi}
+is significantly associated with \texttt{chol} variable.
 
 \begin{table}[H]
 
@@ -266,12 +301,47 @@ chd69 (\%) & No & 2900 (91.9)\\
 \toprule
 term & estimate & statistic & p.value\\
 \midrule
-age & 0.081 & 4.550 & <.001\\
-bmi & 0.060 & 3.385 & <.001\\
-arcus & -12.672 & -7.604 & <.001\\
+age & 0.081 & 4.550 & $<.001$\\
+bmi & 0.060 & 3.385 & $<.001$\\
+arcus & -12.672 & -7.604 & $<.001$\\
 \bottomrule
 \end{tabular}
 \end{table}
+
+\hypertarget{effect-of-arcus}{%
+\paragraph{Effect of arcus}\label{effect-of-arcus}}
+
+Now to check the effect of \texttt{arcus} (a categorical variable with level 0 and 1) on \texttt{chol}, we can do two sample t-test, where one sample is people with \texttt{arcus} 0 and
+other sample is people with \texttt{arcus} 1. Therefore, is \(\mu_o\) and \(\mu_1\) are the
+population mean of arcus 0 and arcus 1 group respectively.
+
+Then our hypotheses are:
+\begin{align*}
+H_o&: \mu_o = \mu_1 \\
+H_a&: \mu_o \neq \mu_1
+\end{align*}
+and appropriate test statistic (assuming unequal variance),
+
+\[
+t_o = \frac{\bar{x_o} - \bar{x_1}}{\sqrt{\frac{s_o^2}{n_o} + \frac{s_1^2}{n_1}}}
+\]
+
+where \(\bar{x}\) and \(s^2\) denotes sample mean and sample variance with subscript
+0 and 1 for \texttt{arcus} group 0 and 1 respectively and \(n_o\) and \(n_1\) are the corresponding sample sizes.
+
+Here we will reject \(H_o\) if the associated \texttt{p\ value} is less then \(\alpha = 0.05\), where \(\alpha\) is the level of significance.
+
+Then from Table: \ref{tab:Table-02}, since \texttt{p.value} is less than 0.001 we can conclude that mean \texttt{chol} differs significantly for 0 and 1 group of \texttt{arcus}, that is, \texttt{arcus} has significant effect on \texttt{chol}.
+
+\hypertarget{effect-of-behpat}{%
+\paragraph{Effect of behpat}\label{effect-of-behpat}}
+
+To check the effect of \texttt{behpat} on \texttt{chol}, we can do oneway ANOVA. In this case the hypotheses are:
+\begin{align*}
+H_o&: \mu_1 = \mu_2 \\
+H_a&: \mu_i \neq \mu_j \! &\text{for at least on i $\ne$ j}
+\end{align*}
+and test statistic is \(F_o = \frac{MS_{reg}}{MS_{E}}\). We will reject \(H_o\) if associated \texttt{p.value} is less than 0.05.
 
 \begin{table}[H]
 
@@ -281,20 +351,37 @@ arcus & -12.672 & -7.604 & <.001\\
 \toprule
 term & df & sumsq & meansq & statistic & p.value\\
 \midrule
-behpat & 3 & 30741.67 & 10247.223 & 5.475 & <.001\\
+behpat & 3 & 30741.67 & 10247.223 & 5.475 & $<.001$\\
 Residuals & 3135 & 5867632.50 & 1871.653 & NA & NA\\
 \bottomrule
 \end{tabular}
 \end{table}
 
+Then from Table: \ref{tab:Table-03}, we conclude that mean \texttt{chol} differs significantly over the levels of \texttt{behpat}.
+
+\clearpage
+
 \hypertarget{question-03}{%
 \subsection{Question 03}\label{question-03}}
 
-\begin{table}[H]
+\textbf{Answer:} To examine the association between \texttt{behat} and \texttt{chd69}, the hypotheses are:
+\begin{align*}
+H_o&: \text{There's no association between \texttt{behpat} and \texttt{chd69}.} \\
+H_a&: \text{There's association between \texttt{behpat} and \texttt{chd69}.}
+\end{align*}
+Here, the test statistics is:
+\[
+\chi^2 = \sum_{i=1}^{r}\sum_{j=1}^{c}\frac{(O_{ij} - E_{ij})^2}{E_{ij}}
+\]
+Where, \(O_{ij}\) is observed frequency and \(E_{ij}\) is the expected frequency and \(r\), \(c\) is the row and column number of contingency table \ref{Table-04}
 
-\caption{\label{tab:Table-04}2x2 table with Chi-square test result}
-\centering
-\begin{tabular}[t]{lrr}
+Here, we would reject \(H_o\) if associated \texttt{p.value} corresponding to test statistics
+is less the 0.05.
+
+\begin{table}[H]
+      \begin{minipage}{.5\linewidth}
+      \centering
+\begin{tabular}{lrr}
 \toprule
 \multicolumn{1}{c}{ } & \multicolumn{2}{c}{CHD} \\
 \cmidrule(l{3pt}r{3pt}){2-3}
@@ -305,47 +392,28 @@ A2 & 1158 & 132\\
 B3 & 1164 & 72\\
 B4 & 332 & 21\\
 \bottomrule
-\end{tabular}
-\end{table}
-
-\begin{table}[H]
-\centering
-\begin{tabular}{lr}
+\end{tabular}\caption{Contingency table}
+      \label{Table-04}
+    \end{minipage}%
+      \begin{minipage}{.5\linewidth}
+        \centering
+\begin{tabular}{rl}
 \toprule
-\multicolumn{2}{c}{Pearson's Chi-squared test} \\
-\cmidrule(l{3pt}r{3pt}){1-2}
 statistic & p.value\\
 \midrule
-20.978 & <.001\\
+20.978 & $<.001$\\
 \bottomrule
-\end{tabular}
-\end{table}
+\end{tabular}\caption{chi-square test}
+    \label{Table-05}
+    \end{minipage}
+      \end{table}
+
+Now from the Table \ref{Table-05}, since \texttt{p.value} is less than 0.001, we can conclude that there's an significant association between \texttt{behpat} and \texttt{chd69}.
+
+\clearpage
 
 \hypertarget{question-04}{%
 \subsection{Question 04}\label{question-04}}
-
-\begin{table}[H]
-
-\caption{\label{tab:Table-05}Estimate of Model Parameters}
-\centering
-\begin{tabular}[t]{lrrrr}
-\toprule
-term & estimate & std.error & statistic & p.value\\
-\midrule
-(Intercept) & 196.971 & 6.483 & 30.381 & <.001\\
-age & 0.632 & 0.139 & 4.550 & <.001\\
-\bottomrule
-\end{tabular}
-\end{table}
-
-\begin{equation}
-\begin{aligned}
-\operatorname{\widehat{chol}} &= 196.97 + 0.63(\operatorname{age})
-\end{aligned}
-\end{equation}
-
-\hypertarget{question-05}{%
-\subsection{Question 05}\label{question-05}}
 
 \begin{table}[H]
 
@@ -355,20 +423,24 @@ age & 0.632 & 0.139 & 4.550 & <.001\\
 \toprule
 term & estimate & std.error & statistic & p.value\\
 \midrule
-(Intercept) & 228.352 & 1.097 & 208.102 & <.001\\
-dibpatType B & -4.147 & 1.546 & -2.682 & 0.007\\
+(Intercept) & 196.971 & 6.483 & 30.381 & \$<.001\$\\
+age & 0.632 & 0.139 & 4.550 & \$<.001\$\\
 \bottomrule
 \end{tabular}
 \end{table}
 
+\textbf{Answer:} The fitted regression line is:
+
 \begin{equation}
 \begin{aligned}
-\operatorname{\widehat{chol}} &= 228.35 - 4.15(\operatorname{dibpat}_{\operatorname{Type\ B}})
+\operatorname{\widehat{chol}} &= 196.97 + 0.63(\operatorname{age})
 \end{aligned}
 \end{equation}
+Then, the cholesterol level is expected to increase by 0.63 units
+for 1-year increase of age.
 
-\hypertarget{question-06}{%
-\subsection{Question 06}\label{question-06}}
+\hypertarget{question-05}{%
+\subsection{Question 05}\label{question-05}}
 
 \begin{table}[H]
 
@@ -378,10 +450,36 @@ dibpatType B & -4.147 & 1.546 & -2.682 & 0.007\\
 \toprule
 term & estimate & std.error & statistic & p.value\\
 \midrule
-(Intercept) & 235.073 & 2.618 & 89.778 & <.001\\
+(Intercept) & 228.352 & 1.097 & 208.102 & \$<.001\$\\
+dibpatType B & -4.147 & 1.546 & -2.682 & 0.007\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{Answer:} The fitted regression line is:
+
+\begin{equation}
+\begin{aligned}
+\operatorname{\widehat{chol}} &= 228.35 - 4.15(\operatorname{dibpat}_{\operatorname{Type\ B}})
+\end{aligned}
+\end{equation}
+So, we can say that, Mean cholesterol level of \texttt{Type\ A\ dibpat} subjects is 228.35. Also, mean cholesterol level of \texttt{Type\ A\ dibpat} subjects is -4.15 unit higher than \texttt{Type\ B\ dibpat} subjects.
+
+\hypertarget{question-06}{%
+\subsection{Question 06}\label{question-06}}
+
+\begin{table}[H]
+
+\caption{\label{tab:Table-08}Estimate of Model Parameters}
+\centering
+\begin{tabular}[t]{lrrrr}
+\toprule
+term & estimate & std.error & statistic & p.value\\
+\midrule
+(Intercept) & 235.073 & 2.618 & 89.778 & \$<.001\$\\
 behpatA2 & -8.150 & 2.883 & -2.827 & 0.005\\
-behpatB3 & -10.226 & 2.894 & -3.533 & <.001\\
-behpatB4 & -13.122 & 3.491 & -3.759 & <.001\\
+behpatB3 & -10.226 & 2.894 & -3.533 & \$<.001\$\\
+behpatB4 & -13.122 & 3.491 & -3.759 & \$<.001\$\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -397,17 +495,17 @@ behpatB4 & -13.122 & 3.491 & -3.759 & <.001\\
 
 \begin{table}[H]
 
-\caption{\label{tab:Table-08}Estimate of Model Parameters}
+\caption{\label{tab:Table-09}Estimate of Model Parameters}
 \centering
 \begin{tabular}[t]{lrrrr}
 \toprule
 term & estimate & std.error & statistic & p.value\\
 \midrule
-(Intercept) & 207.388 & 7.132 & 29.080 & <.001\\
-age & 0.582 & 0.140 & 4.172 & <.001\\
+(Intercept) & 207.388 & 7.132 & 29.080 & \$<.001\$\\
+age & 0.582 & 0.140 & 4.172 & \$<.001\$\\
 behpatA2 & -7.699 & 2.878 & -2.675 & 0.008\\
 behpatB3 & -9.268 & 2.896 & -3.200 & 0.001\\
-behpatB4 & -11.841 & 3.496 & -3.387 & <.001\\
+behpatB4 & -11.841 & 3.496 & -3.387 & \$<.001\$\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -424,14 +522,14 @@ behpatB4 & -11.841 & 3.496 & -3.387 & <.001\\
 
 \begin{table}[H]
 
-\caption{\label{tab:Table-09}Estimate of Model Parameters}
+\caption{\label{tab:Table-10}Estimate of Model Parameters}
 \centering
 \begin{tabular}[t]{lrrrr}
 \toprule
 term & estimate & std.error & statistic & p.value\\
 \midrule
-(Intercept) & 222.252 & 1.171 & 189.755 & <.001\\
-age40 & 0.632 & 0.139 & 4.550 & <.001\\
+(Intercept) & 222.252 & 1.171 & 189.755 & \$<.001\$\\
+age40 & 0.632 & 0.139 & 4.550 & \$<.001\$\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -444,15 +542,15 @@ age40 & 0.632 & 0.139 & 4.550 & <.001\\
 
 \begin{table}[H]
 
-\caption{\label{tab:Table-10}Estimate of Model Parameters}
+\caption{\label{tab:Table-11}Estimate of Model Parameters}
 \centering
 \begin{tabular}[t]{lrrrr}
 \toprule
 term & estimate & std.error & statistic & p.value\\
 \midrule
-(Intercept) & 223.702 & 1.597 & 140.043 & <.001\\
+(Intercept) & 223.702 & 1.597 & 140.043 & \$<.001\$\\
 dibpatType B & -3.644 & 2.175 & -1.675 & 0.094\\
-smokeYes & 8.728 & 2.189 & 3.988 & <.001\\
+smokeYes & 8.728 & 2.189 & 3.988 & \$<.001\$\\
 dibpatType B:smokeYes & 0.265 & 3.085 & 0.086 & 0.932\\
 \bottomrule
 \end{tabular}
@@ -471,10 +569,12 @@ dibpatType B:smokeYes & 0.265 & 3.085 & 0.086 & 0.932\\
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{knitr}\SpecialCharTok{::}\NormalTok{opts\_chunk}\SpecialCharTok{$}\FunctionTok{set}\NormalTok{(}\AttributeTok{echo =} \ConstantTok{FALSE}\NormalTok{,}
-                      \AttributeTok{message =} \ConstantTok{FALSE}\NormalTok{,}
-                      \AttributeTok{warning =} \ConstantTok{FALSE}
-\NormalTok{                      )}
+\NormalTok{knitr}\SpecialCharTok{::}\NormalTok{opts\_chunk}\SpecialCharTok{$}\FunctionTok{set}\NormalTok{(}
+  \AttributeTok{echo =} \ConstantTok{FALSE}\NormalTok{,}
+  \AttributeTok{message =} \ConstantTok{FALSE}\NormalTok{,}
+  \AttributeTok{warning =} \ConstantTok{FALSE}
+\NormalTok{)}
+
 \DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-} package setup {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
 
 \FunctionTok{library}\NormalTok{(dplyr)}
@@ -497,49 +597,56 @@ dibpatType B:smokeYes & 0.265 & 3.085 & 0.086 & 0.932\\
 \DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-} utility functions {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
 
 \NormalTok{kab\_tab }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(tab, ...) \{}
-\NormalTok{  knitr}\SpecialCharTok{::}\FunctionTok{kable}\NormalTok{(}
-\NormalTok{    tab,}
-    \AttributeTok{format =} \StringTok{"latex"}\NormalTok{, }\AttributeTok{booktabs =} \ConstantTok{TRUE}\NormalTok{,}
-    \AttributeTok{digits =} \DecValTok{3}\NormalTok{, ...}
-\NormalTok{  )}
+\NormalTok{  knitr}\SpecialCharTok{::}\FunctionTok{kable}\NormalTok{(tab,}
+               \AttributeTok{format =} \StringTok{"latex"}\NormalTok{,}
+               \AttributeTok{booktabs =} \ConstantTok{TRUE}\NormalTok{,}
+               \AttributeTok{digits =} \DecValTok{3}\NormalTok{,}
+\NormalTok{               ...)}
 \NormalTok{\}}
 
 \NormalTok{p\_format }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(pval) \{}
-  \FunctionTok{ifelse}\NormalTok{(pval }\SpecialCharTok{\textless{}}\NormalTok{ .}\DecValTok{001}\NormalTok{, }\StringTok{" \textless{}.001 "}\NormalTok{, }\FunctionTok{as.character}\NormalTok{(}\FunctionTok{round}\NormalTok{(pval, }\DecValTok{3}\NormalTok{)))}
+  \FunctionTok{ifelse}\NormalTok{(pval }\SpecialCharTok{\textless{}}\NormalTok{ .}\DecValTok{001}\NormalTok{, }\StringTok{"$\textless{}.001$"}\NormalTok{, }\FunctionTok{as.character}\NormalTok{(}\FunctionTok{round}\NormalTok{(pval, }\DecValTok{3}\NormalTok{)))}
 \NormalTok{\}}
 
 \NormalTok{mod\_tab }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(mod, ...) \{}
-\NormalTok{  mod }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{tidy}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%} 
-    \FunctionTok{mutate}\NormalTok{(}\AttributeTok{p.value =} \FunctionTok{p\_format}\NormalTok{(p.value)) }\SpecialCharTok{\%\textgreater{}\%} 
-    \FunctionTok{kab\_tab}\NormalTok{(}
-      \AttributeTok{align =} \StringTok{"lrrrr"}\NormalTok{,}
-      \AttributeTok{caption =} \StringTok{"Estimate of Model Parameters"}\NormalTok{, ...}
-\NormalTok{    ) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  mod }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{tidy}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{mutate}\NormalTok{(}\AttributeTok{p.value =} \FunctionTok{p\_format}\NormalTok{(p.value)) }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{kab\_tab}\NormalTok{(}\AttributeTok{align =} \StringTok{"lrrrr"}\NormalTok{,}
+            \AttributeTok{caption =} \StringTok{"Estimate of Model Parameters"}\NormalTok{, ...) }\SpecialCharTok{\%\textgreater{}\%}
     \FunctionTok{kable\_styling}\NormalTok{(}\AttributeTok{latex\_options =} \StringTok{"HOLD\_position"}\NormalTok{)}
 \NormalTok{\}}
 
 \NormalTok{reg\_eq }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(mod, ...) \{}
-  \FunctionTok{extract\_eq}\NormalTok{(mod, }\AttributeTok{use\_coefs =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{intercept =} \StringTok{"beta"}\NormalTok{, }\AttributeTok{wrap =} \ConstantTok{TRUE}\NormalTok{, ...)}
+  \FunctionTok{extract\_eq}\NormalTok{(mod,}
+             \AttributeTok{use\_coefs =} \ConstantTok{TRUE}\NormalTok{,}
+             \AttributeTok{intercept =} \StringTok{"beta"}\NormalTok{,}
+             \AttributeTok{wrap =} \ConstantTok{TRUE}\NormalTok{,}
+\NormalTok{             ...)}
+\NormalTok{\}}
+
+\NormalTok{mod\_params }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(mod, param, }\AttributeTok{dec =} \DecValTok{2}\NormalTok{) \{}
+  \FunctionTok{round}\NormalTok{(mod}\SpecialCharTok{$}\NormalTok{coefficients[[param]], dec)}
 \NormalTok{\}}
 
 
-
 \DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-} Code for Question{-}01 {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+
 \NormalTok{tab }\OtherTok{\textless{}{-}} \FunctionTok{CreateTableOne}\NormalTok{(}
-    \AttributeTok{data =}\NormalTok{ mydat,}
-    \AttributeTok{vars =} \FunctionTok{c}\NormalTok{(}\StringTok{"age"}\NormalTok{, }\StringTok{"bmi"}\NormalTok{, }\StringTok{"arcus"}\NormalTok{,}\StringTok{"behpat"}\NormalTok{, }\StringTok{"chd69"}\NormalTok{),}
-    \AttributeTok{factorVars =} \StringTok{"arcus"}\NormalTok{,}
-    \AttributeTok{includeNA =} \ConstantTok{TRUE}\NormalTok{,}
-    \AttributeTok{addOverall =} \ConstantTok{TRUE}
-\NormalTok{  )}
+  \AttributeTok{data =}\NormalTok{ mydat,}
+  \AttributeTok{vars =} \FunctionTok{c}\NormalTok{(}\StringTok{"age"}\NormalTok{, }\StringTok{"bmi"}\NormalTok{, }\StringTok{"arcus"}\NormalTok{, }\StringTok{"behpat"}\NormalTok{, }\StringTok{"chd69"}\NormalTok{),}
+  \AttributeTok{factorVars =} \StringTok{"arcus"}\NormalTok{,}
+  \AttributeTok{addOverall =} \ConstantTok{TRUE}
+\NormalTok{)}
 
 \NormalTok{tab\_p }\OtherTok{\textless{}{-}} \FunctionTok{print}\NormalTok{(tab, }\AttributeTok{showAllLevels =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{printToggle =} \ConstantTok{FALSE}\NormalTok{)}
 
-\FunctionTok{kab\_tab}\NormalTok{(tab\_p, }\AttributeTok{caption =} \StringTok{"Descriptive Statistics"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+\FunctionTok{kab\_tab}\NormalTok{(tab\_p, }\AttributeTok{caption =} \StringTok{"Descriptive Statistics"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
   \FunctionTok{kable\_styling}\NormalTok{(}\AttributeTok{latex\_options =} \StringTok{"HOLD\_position"}\NormalTok{)}
-  
+
 
 \DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-} Code for Question{-}02 {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+
 \NormalTok{arcus }\OtherTok{\textless{}{-}} \FunctionTok{t.test}\NormalTok{(chol }\SpecialCharTok{\textasciitilde{}}\NormalTok{ arcus, }\AttributeTok{data =}\NormalTok{ mydat) }\SpecialCharTok{\%\textgreater{}\%}
   \FunctionTok{tidy}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
   \FunctionTok{mutate}\NormalTok{(}\AttributeTok{term =} \StringTok{"arcus"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
@@ -552,50 +659,58 @@ dibpatType B:smokeYes & 0.265 & 3.085 & 0.086 & 0.932\\
   \FunctionTok{select}\NormalTok{(term}\SpecialCharTok{:}\NormalTok{p.value) }\SpecialCharTok{\%\textgreater{}\%}
   \FunctionTok{bind\_rows}\NormalTok{(arcus) }\SpecialCharTok{\%\textgreater{}\%}
   \FunctionTok{mutate}\NormalTok{(}\AttributeTok{p.value =} \FunctionTok{p\_format}\NormalTok{(p.value)) }\SpecialCharTok{\%\textgreater{}\%}
-  \FunctionTok{kab\_tab}\NormalTok{(}
-    \AttributeTok{align =} \StringTok{"lrrr"}\NormalTok{,}
-    \AttributeTok{caption =} \StringTok{"Correlation Test (age, bmi) and T{-}test (arcus) with chol"}
-\NormalTok{  ) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{kab\_tab}\NormalTok{(}\AttributeTok{align =} \StringTok{"lrrr"}\NormalTok{,}
+          \AttributeTok{escape =} \ConstantTok{FALSE}\NormalTok{,}
+          \AttributeTok{caption =} \StringTok{"Correlation Test (age, bmi) and T{-}test (arcus) with chol"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
   \FunctionTok{kable\_styling}\NormalTok{(}\AttributeTok{latex\_options =} \StringTok{"HOLD\_position"}\NormalTok{)}
 
 
 \FunctionTok{anova}\NormalTok{(}\FunctionTok{lm}\NormalTok{(chol }\SpecialCharTok{\textasciitilde{}}\NormalTok{ behpat, }\AttributeTok{data =}\NormalTok{ mydat)) }\SpecialCharTok{\%\textgreater{}\%}
   \FunctionTok{tidy}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
   \FunctionTok{mutate}\NormalTok{(}\AttributeTok{p.value =} \FunctionTok{p\_format}\NormalTok{(p.value)) }\SpecialCharTok{\%\textgreater{}\%}
-  \FunctionTok{kab\_tab}\NormalTok{(}
-    \AttributeTok{align =} \StringTok{"lrrrrr"}\NormalTok{,}
-    \AttributeTok{caption =} \StringTok{"One Way Analysis of Variance for chol on behpat"}
-\NormalTok{  ) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{kab\_tab}\NormalTok{(}\AttributeTok{align =} \StringTok{"lrrrrr"}\NormalTok{,}
+          \AttributeTok{escape =} \ConstantTok{FALSE}\NormalTok{,}
+          \AttributeTok{caption =} \StringTok{"One Way Analysis of Variance for chol on behpat"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
   \FunctionTok{kable\_styling}\NormalTok{(}\AttributeTok{latex\_options =} \StringTok{"HOLD\_position"}\NormalTok{)}
-
 
 
 \DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-} Code for Question{-}03 {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
 
-\NormalTok{tab\_chi }\OtherTok{\textless{}{-}}\NormalTok{ mydat }\SpecialCharTok{\%\textgreater{}\%}\NormalTok{ janitor}\SpecialCharTok{::}\FunctionTok{tabyl}\NormalTok{(behpat, chd69) }
+\NormalTok{df\_cont }\OtherTok{\textless{}{-}}\NormalTok{ mydat }\SpecialCharTok{\%\textgreater{}\%}\NormalTok{ janitor}\SpecialCharTok{::}\FunctionTok{tabyl}\NormalTok{(behpat, chd69)}
 
-\NormalTok{tab\_chi }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{kab\_tab}\NormalTok{(}
-    \AttributeTok{align =} \StringTok{"lrr"}\NormalTok{,}
-    \AttributeTok{caption =} \StringTok{"2x2 table with Chi{-}square test result"}      
-\NormalTok{    ) }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{add\_header\_above}\NormalTok{(}\AttributeTok{header =} \FunctionTok{c}\NormalTok{(}\StringTok{" "} \OtherTok{=} \DecValTok{1}\NormalTok{, }\StringTok{"CHD"} \OtherTok{=} \DecValTok{2}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{kable\_styling}\NormalTok{(}\AttributeTok{position =} \StringTok{"center"}\NormalTok{, }\AttributeTok{latex\_options =} \StringTok{"HOLD\_position"}\NormalTok{)}
+\NormalTok{tab\_cont }\OtherTok{\textless{}{-}}\NormalTok{ df\_cont }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{kab\_tab}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{add\_header\_above}\NormalTok{(}\AttributeTok{header =} \FunctionTok{c}\NormalTok{(}\StringTok{" "} \OtherTok{=} \DecValTok{1}\NormalTok{, }\StringTok{"CHD"} \OtherTok{=} \DecValTok{2}\NormalTok{))}
 
-\NormalTok{tab\_chi }\SpecialCharTok{\%\textgreater{}\%}\NormalTok{ janitor}\SpecialCharTok{::}\FunctionTok{chisq.test}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{tidy}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{select}\NormalTok{(statistic, p.value) }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{p.value =} \FunctionTok{p\_format}\NormalTok{(p.value)) }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{kab\_tab}\NormalTok{(}\AttributeTok{align =} \StringTok{"lrr"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{add\_header\_above}\NormalTok{(}\AttributeTok{header =} \FunctionTok{c}\NormalTok{(}\StringTok{"Pearson\textquotesingle{}s Chi{-}squared test"} \OtherTok{=} \DecValTok{2}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{kable\_styling}\NormalTok{(}\AttributeTok{position =} \StringTok{"center"}\NormalTok{, }\AttributeTok{latex\_options =} \StringTok{"HOLD\_position"}\NormalTok{)}
+\NormalTok{tab\_chi }\OtherTok{\textless{}{-}}\NormalTok{ df\_cont }\SpecialCharTok{\%\textgreater{}\%}
+\NormalTok{  janitor}\SpecialCharTok{::}\FunctionTok{chisq.test}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{tidy}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{select}\NormalTok{(statistic, p.value) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{p.value =} \FunctionTok{p\_format}\NormalTok{(p.value)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{kab\_tab}\NormalTok{(}\AttributeTok{escape =} \ConstantTok{FALSE}\NormalTok{)}
 
-
+\NormalTok{tab\_side }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}
+    \StringTok{"}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{begin\{table\}[H]}
+\StringTok{      }\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{begin\{minipage\}\{.5}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{linewidth\}}
+\StringTok{      }\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{centering"}\NormalTok{,}
+\NormalTok{      tab\_cont,}
+      \StringTok{"}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{caption\{Contingency table\}}
+\StringTok{      }\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{label\{Table{-}04\}}
+\StringTok{    }\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{end\{minipage\}\%}
+\StringTok{      }\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{begin\{minipage\}\{.5}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{linewidth\}}
+\StringTok{        }\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{centering"}\NormalTok{,}
+\NormalTok{    tab\_chi,}
+    \StringTok{"}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{caption\{chi{-}square test\}}
+\StringTok{    }\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{label\{Table{-}05\}}
+\StringTok{    }\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{end\{minipage\}}
+\StringTok{      }\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{end\{table\}"}
+\NormalTok{  )}
 
 \DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-} Code for Question{-}04 {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
 
 \NormalTok{m1 }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(chol }\SpecialCharTok{\textasciitilde{}}\NormalTok{ age, }\AttributeTok{data =}\NormalTok{ mydat)}
 \NormalTok{m1 }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{mod\_tab}\NormalTok{()}
+
 \FunctionTok{reg\_eq}\NormalTok{(m1)}
 
 \DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-} Code for Question{-}05 {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
@@ -621,8 +736,8 @@ dibpatType B:smokeYes & 0.265 & 3.085 & 0.086 & 0.932\\
 
 \DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-} Code for Question{-}08 {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
 
-\NormalTok{mydat }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{age40 =}\NormalTok{ age }\SpecialCharTok{{-}} \DecValTok{40}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{mydat }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{age40 =}\NormalTok{ age }\SpecialCharTok{{-}} \DecValTok{40}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
   \FunctionTok{lm}\NormalTok{(chol }\SpecialCharTok{\textasciitilde{}}\NormalTok{ age40, }\AttributeTok{data =}\NormalTok{ .) }\OtherTok{{-}\textgreater{}}\NormalTok{ m5}
 
 \NormalTok{m5 }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{mod\_tab}\NormalTok{()}
