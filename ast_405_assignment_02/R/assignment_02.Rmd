@@ -18,7 +18,7 @@ output:
       before_body: ../tex_files/title.sty
 documentclass: article
 classoption: oneside
-geometry: [top=1.1in, bottom=1in, right=1.1in, left=1.1in]
+geometry: [top=1in, bottom=1in, right=1.1in, left=1.1in]
 linestretch: 1.25
 fontsize: 12pt
 ---
@@ -78,15 +78,16 @@ mod_tab <- function(mod, ...) {
     kable_styling(latex_options = "HOLD_position")
 }
 
-reg_eq <- function(mod, ...) {
+reg_eq <- function(mod, ref, ...) {
   extract_eq(mod,
              use_coefs = TRUE,
              intercept = "beta",
              wrap = TRUE,
+             label = paste0("eq",ref),
              ...)
 }
 
-mod_params <- function(mod, param, dec = 2) {
+params <- function(mod, param, dec = 2) {
   round(mod$coefficients[[param]], dec)
 }
 
@@ -283,10 +284,10 @@ m1 %>% mod_tab()
 ```
 
 **Answer:** The fitted regression line is:
-```{r eq01, results = "asis"}
-reg_eq(m1)
+```{r eq01}
+reg_eq(m1, 1)
 ```
-Then, the cholesterol level is expected to increase by `r mod_params(m1, 2)` units
+Then, the cholesterol level is expected to increase by `r params(m1, 2)` units
 for 1-year increase of age.
 
 
@@ -302,9 +303,9 @@ m2 %>% mod_tab()
 
 **Answer:** The fitted regression line is:
 ```{r eq02}
-reg_eq(m2)
+reg_eq(m2, 2)
 ```
-So, we can say that, Mean cholesterol level of `Type A dibpat` subjects is `r mod_params(m2, 1)`. Also, mean cholesterol level of `Type A dibpat` subjects is `r mod_params(m2, 2)` unit higher than `Type B dibpat` subjects.
+So, we can say that, Mean cholesterol level of `Type A dibpat` subjects is `r params(m2, 1)`. Also, mean cholesterol level of `Type A dibpat` subjects is `r -params(m2, 2)` unit higher than `Type B dibpat` subjects.
 
 
 ## Question 06
@@ -316,12 +317,17 @@ m3 <- lm(chol ~ behpat, data = mydat)
 m3 %>% mod_tab()
 
 ```
+**Answer:** The fitted regression line is:
 
-
-```{r eq03, results = "asis"}
-reg_eq(m3)
+```{r eq03}
+reg_eq(m3, 3)
 ```
+So, we can say, since `Type A1` Behavior pattern subjects are reference group,
 
+* Mean cholesterol level of `Type A1` subjects is `r params(m3, 1)` unit.
+* Mean cholesterol level of `Type A2` subjects is `r params(m3, 2)` unit         lower than that of `Type A1` subjects.
+* Mean cholesterol level of `Type B3` subjects is `r params(m3, 3)` unit         lower than that of `Type A1` subjects.
+* Mean cholesterol level of `Type B4` subjects is `r params(m3, 4)` unit         lower than that of `Type A1` subjects.
 
 
 ## Question 07
@@ -329,16 +335,22 @@ reg_eq(m3)
 
 ## ------- Code for Question-08 ------------------------
 
-m4 <- lm(chol ~ age + behpat, data = mydat)
+m4 <- lm(chol ~ age + dibpat, data = mydat)
 m4 %>% mod_tab()
 
 ```
+**Answer:** The fitted regression line is:
 
-
-```{r eq04, results = "asis"}
-reg_eq(m4)
+```{r eq04}
+reg_eq(m4, 4)
 ```
+Since `Type A1` subjects are reference group,
 
+* Mean cholesterol level of subjects with age 0 and `Type A` pattern is `r   params(m4, 1)` unit.
+* Mean cholesterol level increases about `r params(m4, 2)` for 1-year increase    of age, holding dibpat fixed.
+* Mean cholesterol level of `Type B2` subjects is `r params(m4, 3)` unit lower than that of `Type A` dibpat subjects, holding the subject's age fixed.
+
+Here, Both the regression coefficients corresponding to age and dibpat (Eq \ref{eq: eq4}) have changed from the case of simple linear regression in Eq \ref{eq: eq1} and Eq \ref{eq: eq2}. And also the value of $R^2_{adj}$ increased.
 
 
 ## Question 08
@@ -355,10 +367,15 @@ m5 %>% mod_tab()
 
 ```
 
-
-```{r eq05, results = "asis"}
-reg_eq(m5)
+The new fitted model after subtracting 40 from the variable `age` is:
+```{r eq05}
+reg_eq(m5, 5)
 ```
+
+* Since the explanatory variable is age minus 40, we can say, the mean cholesterol    level of a 40 year old subject is `r params(m5, 1)`.
+* Mean cholesterol level is expected to in increase by `r params(m5, 2)` for 1 year   increase of age.
+
+The main difference of this model (Eq \ref{eq: eq1}) compared to model \ref{eq: eq5} is that, we can interpret the intercept term for this model logically.
 
 
 ```{r Table-11}
@@ -368,11 +385,17 @@ m6 <- lm(chol ~ dibpat * smoke, data = mydat)
 m6 %>% mod_tab()
 ```
 
-
-```{r eq06, results = "asis"}
-reg_eq(m6)
+In this case, the fitted model is:
+```{r eq06}
+reg_eq(m6, 6)
 ```
 
+Here the reference groups are `Non-smoker` and dibpat `Type A` subjects. So,
+
+* The mean cholesterol level of Type A non smoker subject is `r params(m6, 1)` unit.
+* Among the non-smokers, mean cholesterol level of dibpat `Type B` subjects is `r -params(m6, 2)` unit lower compared to `Type A` subject.
+* Among the `Type A` subjects, mean cholesterol level of smokers is `r params(m6, 3)` unit higher than that of non-smokers.
+* Difference of mean cholesterol level between smokers and non-smokers is `r params(m6, 4)` unit higher in `Type B` dibpat subjects compared to that of `Type A` dibpat subjects.
 
 \clearpage
 

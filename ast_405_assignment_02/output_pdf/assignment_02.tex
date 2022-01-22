@@ -432,6 +432,7 @@ age & 0.632 & 0.139 & 4.550 & \$<.001\$\\
 \textbf{Answer:} The fitted regression line is:
 
 \begin{equation}
+\label{eq: eq1}
 \begin{aligned}
 \operatorname{\widehat{chol}} &= 196.97 + 0.63(\operatorname{age})
 \end{aligned}
@@ -459,11 +460,12 @@ dibpatType B & -4.147 & 1.546 & -2.682 & 0.007\\
 \textbf{Answer:} The fitted regression line is:
 
 \begin{equation}
+\label{eq: eq2}
 \begin{aligned}
 \operatorname{\widehat{chol}} &= 228.35 - 4.15(\operatorname{dibpat}_{\operatorname{Type\ B}})
 \end{aligned}
 \end{equation}
-So, we can say that, Mean cholesterol level of \texttt{Type\ A\ dibpat} subjects is 228.35. Also, mean cholesterol level of \texttt{Type\ A\ dibpat} subjects is -4.15 unit higher than \texttt{Type\ B\ dibpat} subjects.
+So, we can say that, Mean cholesterol level of \texttt{Type\ A\ dibpat} subjects is 228.35. Also, mean cholesterol level of \texttt{Type\ A\ dibpat} subjects is 4.15 unit higher than \texttt{Type\ B\ dibpat} subjects.
 
 \hypertarget{question-06}{%
 \subsection{Question 06}\label{question-06}}
@@ -484,11 +486,27 @@ behpatB4 & -13.122 & 3.491 & -3.759 & \$<.001\$\\
 \end{tabular}
 \end{table}
 
+\textbf{Answer:} The fitted regression line is:
+
 \begin{equation}
+\label{eq: eq3}
 \begin{aligned}
 \operatorname{\widehat{chol}} &= 235.07 - 8.15(\operatorname{behpat}_{\operatorname{A2}}) - 10.23(\operatorname{behpat}_{\operatorname{B3}}) - 13.12(\operatorname{behpat}_{\operatorname{B4}})
 \end{aligned}
 \end{equation}
+So, we can say, since \texttt{Type\ A1} Behavior pattern subjects are reference group,
+
+\begin{itemize}
+\tightlist
+\item
+  Mean cholesterol level of \texttt{Type\ A1} subjects is 235.07 unit.
+\item
+  Mean cholesterol level of \texttt{Type\ A2} subjects is -8.15 unit lower than that of \texttt{Type\ A1} subjects.
+\item
+  Mean cholesterol level of \texttt{Type\ B3} subjects is -10.23 unit lower than that of \texttt{Type\ A1} subjects.
+\item
+  Mean cholesterol level of \texttt{Type\ B4} subjects is -13.12 unit lower than that of \texttt{Type\ A1} subjects.
+\end{itemize}
 
 \hypertarget{question-07}{%
 \subsection{Question 07}\label{question-07}}
@@ -501,21 +519,34 @@ behpatB4 & -13.122 & 3.491 & -3.759 & \$<.001\$\\
 \toprule
 term & estimate & std.error & statistic & p.value\\
 \midrule
-(Intercept) & 207.388 & 7.132 & 29.080 & \$<.001\$\\
-age & 0.582 & 0.140 & 4.172 & \$<.001\$\\
-behpatA2 & -7.699 & 2.878 & -2.675 & 0.008\\
-behpatB3 & -9.268 & 2.896 & -3.200 & 0.001\\
-behpatB4 & -11.841 & 3.496 & -3.387 & \$<.001\$\\
+(Intercept) & 200.191 & 6.637 & 30.163 & \$<.001\$\\
+age & 0.600 & 0.140 & 4.302 & \$<.001\$\\
+dibpatType B & -3.469 & 1.550 & -2.238 & 0.025\\
 \bottomrule
 \end{tabular}
 \end{table}
 
+\textbf{Answer:} The fitted regression line is:
+
 \begin{equation}
+\label{eq: eq4}
 \begin{aligned}
-\operatorname{\widehat{chol}} &= 207.39 + 0.58(\operatorname{age}) - 7.7(\operatorname{behpat}_{\operatorname{A2}}) - 9.27(\operatorname{behpat}_{\operatorname{B3}})\ - \\
-&\quad 11.84(\operatorname{behpat}_{\operatorname{B4}})
+\operatorname{\widehat{chol}} &= 200.19 + 0.6(\operatorname{age}) - 3.47(\operatorname{dibpat}_{\operatorname{Type\ B}})
 \end{aligned}
 \end{equation}
+Since \texttt{Type\ A1} subjects are reference group,
+
+\begin{itemize}
+\tightlist
+\item
+  Mean cholesterol level of subjects with age 0 and \texttt{Type\ A} pattern is 200.19 unit.
+\item
+  Mean cholesterol level increases about 0.6 for 1-year increase of age, holding dibpat fixed.
+\item
+  Mean cholesterol level of \texttt{Type\ B2} subjects is -3.47 unit lower than that of \texttt{Type\ A} dibpat subjects, holding the subject's age fixed.
+\end{itemize}
+
+Here, Both the regression coefficients corresponding to age and dibpat (Eq \ref{eq: eq4}) have changed from the case of simple linear regression in Eq \ref{eq: eq1} and Eq \ref{eq: eq2}. And also the value of \(R^2_{adj}\) increased.
 
 \hypertarget{question-08}{%
 \subsection{Question 08}\label{question-08}}
@@ -534,11 +565,24 @@ age40 & 0.632 & 0.139 & 4.550 & \$<.001\$\\
 \end{tabular}
 \end{table}
 
+The new fitted model after subtracting 40 from the variable \texttt{age} is:
+
 \begin{equation}
+\label{eq: eq5}
 \begin{aligned}
 \operatorname{\widehat{chol}} &= 222.25 + 0.63(\operatorname{age40})
 \end{aligned}
 \end{equation}
+
+\begin{itemize}
+\tightlist
+\item
+  Since the explanatory variable is age minus 40, we can say, the mean cholesterol level of a 40 year old subject is 222.25.
+\item
+  Mean cholesterol level is expected to in increase by 0.63 for 1 year increase of age.
+\end{itemize}
+
+The main difference of this model (Eq \ref{eq: eq1}) compared to model \ref{eq: eq5} is that, we can interpret the intercept term for this model logically.
 
 \begin{table}[H]
 
@@ -556,11 +600,28 @@ dibpatType B:smokeYes & 0.265 & 3.085 & 0.086 & 0.932\\
 \end{tabular}
 \end{table}
 
+In this case, the fitted model is:
+
 \begin{equation}
+\label{eq: eq6}
 \begin{aligned}
 \operatorname{\widehat{chol}} &= 223.7 - 3.64(\operatorname{dibpat}_{\operatorname{Type\ B}}) + 8.73(\operatorname{smoke}_{\operatorname{Yes}}) + 0.27(\operatorname{dibpat}_{\operatorname{Type\ B}} \times \operatorname{smoke}_{\operatorname{Yes}})
 \end{aligned}
 \end{equation}
+
+Here the reference groups are \texttt{Non-smoker} and dibpat \texttt{Type\ A} subjects. So,
+
+\begin{itemize}
+\tightlist
+\item
+  The mean cholesterol level of Type A non smoker subject is 223.7 unit.
+\item
+  Among the non-smokers, mean cholesterol level of dibpat \texttt{Type\ B} subjects is 3.64 unit lower compared to \texttt{Type\ A} subject.
+\item
+  Among the \texttt{Type\ A} subjects, mean cholesterol level of smokers is 8.73 unit higher than that of non-smokers.
+\item
+  Difference of mean cholesterol level between smokers and non-smokers is 0.27 unit higher in \texttt{Type\ B} dibpat subjects compared to that of \texttt{Type\ A} dibpat subjects.
+\end{itemize}
 
 \clearpage
 
@@ -617,15 +678,16 @@ dibpatType B:smokeYes & 0.265 & 3.085 & 0.086 & 0.932\\
     \FunctionTok{kable\_styling}\NormalTok{(}\AttributeTok{latex\_options =} \StringTok{"HOLD\_position"}\NormalTok{)}
 \NormalTok{\}}
 
-\NormalTok{reg\_eq }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(mod, ...) \{}
+\NormalTok{reg\_eq }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(mod, ref, ...) \{}
   \FunctionTok{extract\_eq}\NormalTok{(mod,}
              \AttributeTok{use\_coefs =} \ConstantTok{TRUE}\NormalTok{,}
              \AttributeTok{intercept =} \StringTok{"beta"}\NormalTok{,}
              \AttributeTok{wrap =} \ConstantTok{TRUE}\NormalTok{,}
+             \AttributeTok{label =} \FunctionTok{paste0}\NormalTok{(}\StringTok{"eq"}\NormalTok{,ref),}
 \NormalTok{             ...)}
 \NormalTok{\}}
 
-\NormalTok{mod\_params }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(mod, param, }\AttributeTok{dec =} \DecValTok{2}\NormalTok{) \{}
+\NormalTok{params }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(mod, param, }\AttributeTok{dec =} \DecValTok{2}\NormalTok{) \{}
   \FunctionTok{round}\NormalTok{(mod}\SpecialCharTok{$}\NormalTok{coefficients[[param]], dec)}
 \NormalTok{\}}
 
@@ -711,28 +773,28 @@ dibpatType B:smokeYes & 0.265 & 3.085 & 0.086 & 0.932\\
 \NormalTok{m1 }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(chol }\SpecialCharTok{\textasciitilde{}}\NormalTok{ age, }\AttributeTok{data =}\NormalTok{ mydat)}
 \NormalTok{m1 }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{mod\_tab}\NormalTok{()}
 
-\FunctionTok{reg\_eq}\NormalTok{(m1)}
+\FunctionTok{reg\_eq}\NormalTok{(m1, }\DecValTok{1}\NormalTok{)}
 
 \DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-} Code for Question{-}05 {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
 
 \NormalTok{m2 }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(chol }\SpecialCharTok{\textasciitilde{}}\NormalTok{ dibpat, }\AttributeTok{data =}\NormalTok{ mydat)}
 \NormalTok{m2 }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{mod\_tab}\NormalTok{()}
 
-\FunctionTok{reg\_eq}\NormalTok{(m2)}
+\FunctionTok{reg\_eq}\NormalTok{(m2, }\DecValTok{2}\NormalTok{)}
 
 \DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-} Code for Question{-}05 {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
 
 \NormalTok{m3 }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(chol }\SpecialCharTok{\textasciitilde{}}\NormalTok{ behpat, }\AttributeTok{data =}\NormalTok{ mydat)}
 \NormalTok{m3 }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{mod\_tab}\NormalTok{()}
 
-\FunctionTok{reg\_eq}\NormalTok{(m3)}
+\FunctionTok{reg\_eq}\NormalTok{(m3, }\DecValTok{3}\NormalTok{)}
 
 \DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-} Code for Question{-}08 {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
 
-\NormalTok{m4 }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(chol }\SpecialCharTok{\textasciitilde{}}\NormalTok{ age }\SpecialCharTok{+}\NormalTok{ behpat, }\AttributeTok{data =}\NormalTok{ mydat)}
+\NormalTok{m4 }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(chol }\SpecialCharTok{\textasciitilde{}}\NormalTok{ age }\SpecialCharTok{+}\NormalTok{ dibpat, }\AttributeTok{data =}\NormalTok{ mydat)}
 \NormalTok{m4 }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{mod\_tab}\NormalTok{()}
 
-\FunctionTok{reg\_eq}\NormalTok{(m4)}
+\FunctionTok{reg\_eq}\NormalTok{(m4, }\DecValTok{4}\NormalTok{)}
 
 \DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-} Code for Question{-}08 {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
 
@@ -742,12 +804,12 @@ dibpatType B:smokeYes & 0.265 & 3.085 & 0.086 & 0.932\\
 
 \NormalTok{m5 }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{mod\_tab}\NormalTok{()}
 
-\FunctionTok{reg\_eq}\NormalTok{(m5)}
+\FunctionTok{reg\_eq}\NormalTok{(m5, }\DecValTok{5}\NormalTok{)}
 \DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-} Code for Question{-}08 {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
 
 \NormalTok{m6 }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(chol }\SpecialCharTok{\textasciitilde{}}\NormalTok{ dibpat }\SpecialCharTok{*}\NormalTok{ smoke, }\AttributeTok{data =}\NormalTok{ mydat)}
 \NormalTok{m6 }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{mod\_tab}\NormalTok{()}
-\FunctionTok{reg\_eq}\NormalTok{(m6)}
+\FunctionTok{reg\_eq}\NormalTok{(m6, }\DecValTok{6}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
