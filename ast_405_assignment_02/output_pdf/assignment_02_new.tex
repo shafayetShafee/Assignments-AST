@@ -227,10 +227,13 @@ Dr. Mahbub Latif\\Professor\\ISRT, DU
 \setstretch{1.25}
 \clearpage
 
-\hypertarget{answer-to-ques-01}{%
-\section{Answer To Ques 01}\label{answer-to-ques-01}}
+\hypertarget{answers-to-questions}{%
+\section{Answers to Questions}\label{answers-to-questions}}
 
-For the continuous variables \texttt{age} and \texttt{bmi}, mean and standard deviation (SD) is obtained. And for categorical variable \texttt{arcus}, \texttt{behpat} and \texttt{chd69}, frequency and proportion (in percentage) is obtained as descriptive statistics, which are shown in the following table:
+\hypertarget{question-01}{%
+\subsection{Question 01}\label{question-01}}
+
+\textbf{Answer:} For the continuous variables \texttt{age} and \texttt{bmi}, mean and standard deviation (SD) is obtained. And for categorical variable \texttt{arcus}, \texttt{behpat}, and \texttt{chd69} frequency and proportion (in percentage) is obtained as descriptive statistics, which are shown in the following table:
 
 \begin{table}[H]
 
@@ -243,14 +246,14 @@ For the continuous variables \texttt{age} and \texttt{bmi}, mean and standard de
 n &  & 3154\\
 age (mean (SD)) &  & 46.35 (5.56)\\
 bmi (mean (SD)) &  & 24.48 (2.55)\\
-arcus (%) & 0 & 2219 (70.4)\\
+arcus (\%) & 0 & 2219 (70.4)\\
  & 1 & 934 (29.6)\\
 \addlinespace
-behpat (%) & A1 & 275 ( 8.7)\\
+behpat (\%) & A1 & 275 ( 8.7)\\
  & A2 & 1290 (40.9)\\
  & B3 & 1236 (39.2)\\
  & B4 & 353 (11.2)\\
-chd69 (%) & No & 2900 (91.9)\\
+chd69 (\%) & No & 2900 (91.9)\\
 \addlinespace
  & Yes & 254 ( 8.1)\\
 \bottomrule
@@ -259,11 +262,13 @@ chd69 (%) & No & 2900 (91.9)\\
 
 \clearpage
 
-\hypertarget{answer-to-ques-02}{%
-\section{Answer To Ques 02}\label{answer-to-ques-02}}
+\hypertarget{question-02}{%
+\subsection{Question 02}\label{question-02}}
+
+\textbf{Answer:}
 
 \hypertarget{effect-of-age-and-bmi}{%
-\paragraph{Effect of age and bmi :}\label{effect-of-age-and-bmi}}
+\paragraph{Effect of age and bmi}\label{effect-of-age-and-bmi}}
 
 To check whether each of \texttt{age} and \texttt{bmi} has significant effect on \texttt{chol}, we need to do correlation test (pearson).
 
@@ -285,7 +290,8 @@ distribution under \(H_o\).
 
 Here we will reject \(H_o\) if the associated \texttt{p.value} is less then \(\alpha = 0.05\), where \(\alpha\) is the level of significance.
 
-Now from Table: \ref{tab:Table-02}, we can see that both of the variables \texttt{age} and \texttt{bmi} is significantly associated with \texttt{chol} variable.
+Now from Table: \ref{tab:Table-02}, we can see that both of the variables \texttt{age} and \texttt{bmi}
+is significantly associated with \texttt{chol} variable.
 
 \begin{table}[H]
 
@@ -295,9 +301,9 @@ Now from Table: \ref{tab:Table-02}, we can see that both of the variables \textt
 \toprule
 term & estimate & statistic & p.value\\
 \midrule
-age & 0.081 & 4.550 & $<.001$\\
-bmi & 0.060 & 3.385 & $<.001$\\
-arcus & -12.672 & -7.604 & $<.001$\\
+age & 0.081 & 4.550 & <.001\\
+bmi & 0.060 & 3.385 & <.001\\
+arcus & -12.672 & -7.604 & <.001\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -307,7 +313,7 @@ arcus & -12.672 & -7.604 & $<.001$\\
 
 Now to check the effect of \texttt{arcus} (a categorical variable with level 0 and 1) on \texttt{chol}, we can do two sample t-test, where one sample is people with \texttt{arcus} 0 and
 other sample is people with \texttt{arcus} 1. Therefore, is \(\mu_o\) and \(\mu_1\) are the
-population mean of \texttt{arcus} 0 and \texttt{arcus} 1 group respectively.
+population mean of arcus 0 and arcus 1 group respectively.
 
 Then our hypotheses are:
 \begin{align*}
@@ -328,7 +334,7 @@ Here we will reject \(H_o\) if the associated \texttt{p\ value} is less then \(\
 Then from Table: \ref{tab:Table-02}, since \texttt{p.value} is less than 0.001 we can conclude that mean \texttt{chol} differs significantly for 0 and 1 group of \texttt{arcus}, that is, \texttt{arcus} has significant effect on \texttt{chol}.
 
 \hypertarget{effect-of-behpat}{%
-\paragraph{Effect of behpat:}\label{effect-of-behpat}}
+\paragraph{Effect of behpat}\label{effect-of-behpat}}
 
 To check the effect of \texttt{behpat} on \texttt{chol}, we can do oneway ANOVA. In this case the hypotheses are:
 \begin{align*}
@@ -345,7 +351,7 @@ and test statistic is \(F_o = \frac{MS_{reg}}{MS_{E}}\). We will reject \(H_o\) 
 \toprule
 term & df & sumsq & meansq & statistic & p.value\\
 \midrule
-behpat & 3 & 30741.67 & 10247.223 & 5.475 & $<.001$\\
+behpat & 3 & 30741.67 & 10247.223 & 5.475 & <.001\\
 Residuals & 3135 & 5867632.50 & 1871.653 & NA & NA\\
 \bottomrule
 \end{tabular}
@@ -355,10 +361,10 @@ Then from Table: \ref{tab:Table-03}, we conclude that mean \texttt{chol} differs
 
 \clearpage
 
-\hypertarget{answer-to-ques-03}{%
-\section{Answer To Ques 03}\label{answer-to-ques-03}}
+\hypertarget{question-03}{%
+\subsection{Question 03}\label{question-03}}
 
-To examine the association between \texttt{behat} and \texttt{chd69}, the hypotheses are:
+\textbf{Answer:} To examine the association between \texttt{behat} and \texttt{chd69}, the hypotheses are:
 \begin{align*}
 H_o&: \text{There's no association between \texttt{behpat} and \texttt{chd69}.} \\
 H_a&: \text{There's association between \texttt{behpat} and \texttt{chd69}.}
@@ -395,7 +401,7 @@ B4 & 332 & 21\\
 \toprule
 statistic & p.value\\
 \midrule
-20.978 & $<.001$\\
+20.978 & <.001\\
 \bottomrule
 \end{tabular}\caption{chi-square test}
     \label{Table-05}
@@ -406,8 +412,10 @@ Now from the Table \ref{Table-05}, since \texttt{p.value} is less than 0.001, we
 
 \clearpage
 
-\hypertarget{answer-to-ques-04}{%
-\section{Answer To Ques 04}\label{answer-to-ques-04}}
+\hypertarget{question-04}{%
+\subsection{Question 04}\label{question-04}}
+
+\textbf{Answer:}
 
 \begin{table}[H]
 
@@ -417,8 +425,8 @@ Now from the Table \ref{Table-05}, since \texttt{p.value} is less than 0.001, we
 \toprule
 term & estimate & std.error & statistic & p.value\\
 \midrule
-(Intercept) & 196.971 & 6.483 & 30.381 & $<.001$\\
-age & 0.632 & 0.139 & 4.550 & $<.001$\\
+(Intercept) & 196.971 & 6.483 & 30.381 & <.001\\
+age & 0.632 & 0.139 & 4.550 & <.001\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -431,14 +439,13 @@ The fitted regression line is:
 \operatorname{\widehat{chol}} &= 196.97 + 0.63(\operatorname{age})
 \end{aligned}
 \end{equation}
-
-\underline{\texttt{Interpretation of regression coefficients:}}
-
-The cholesterol level is expected to increase by 0.63 units
+Then, the cholesterol level is expected to increase by 0.63 units
 for 1-year increase of age.
 
-\hypertarget{answer-to-ques-05}{%
-\section{Answer To Ques 05}\label{answer-to-ques-05}}
+\hypertarget{question-05}{%
+\subsection{Question 05}\label{question-05}}
+
+\textbf{Answer:}
 
 \begin{table}[H]
 
@@ -448,7 +455,7 @@ for 1-year increase of age.
 \toprule
 term & estimate & std.error & statistic & p.value\\
 \midrule
-(Intercept) & 228.352 & 1.097 & 208.102 & $<.001$\\
+(Intercept) & 228.352 & 1.097 & 208.102 & <.001\\
 dibpatType B & -4.147 & 1.546 & -2.682 & 0.007\\
 \bottomrule
 \end{tabular}
@@ -462,19 +469,12 @@ The fitted regression line is:
 \operatorname{\widehat{chol}} &= 228.35 - 4.15(\operatorname{dibpat}_{\operatorname{Type\ B}})
 \end{aligned}
 \end{equation}
+So, we can say that, Mean cholesterol level of \texttt{Type\ A\ dibpat} subjects is 228.35. Also, mean cholesterol level of \texttt{Type\ A\ dibpat} subjects is 4.15 unit higher than \texttt{Type\ B\ dibpat} subjects.
 
-\underline{\texttt{Interpretation of regression coefficients:}}
+\hypertarget{question-06}{%
+\subsection{Question 06}\label{question-06}}
 
-\begin{itemize}
-\tightlist
-\item
-  Mean cholesterol level of \texttt{Type\ A\ dibpat} subjects is 228.35.
-\item
-  Also, mean cholesterol level of \texttt{Type\ A\ dibpat} subjects is 4.15 unit higher than \texttt{Type\ B\ dibpat} subjects.
-\end{itemize}
-
-\hypertarget{answer-to-ques-06}{%
-\section{Answer To Ques 06}\label{answer-to-ques-06}}
+\textbf{Answer:}
 
 \begin{table}[H]
 
@@ -484,10 +484,10 @@ The fitted regression line is:
 \toprule
 term & estimate & std.error & statistic & p.value\\
 \midrule
-(Intercept) & 235.073 & 2.618 & 89.778 & $<.001$\\
+(Intercept) & 235.073 & 2.618 & 89.778 & <.001\\
 behpatA2 & -8.150 & 2.883 & -2.827 & 0.005\\
-behpatB3 & -10.226 & 2.894 & -3.533 & $<.001$\\
-behpatB4 & -13.122 & 3.491 & -3.759 & $<.001$\\
+behpatB3 & -10.226 & 2.894 & -3.533 & <.001\\
+behpatB4 & -13.122 & 3.491 & -3.759 & <.001\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -500,10 +500,7 @@ The fitted regression line is:
 \operatorname{\widehat{chol}} &= 235.07 - 8.15(\operatorname{behpat}_{\operatorname{A2}}) - 10.23(\operatorname{behpat}_{\operatorname{B3}}) - 13.12(\operatorname{behpat}_{\operatorname{B4}})
 \end{aligned}
 \end{equation}
-
-\underline{\texttt{Interpretation of regression coefficients:}}
-
-Since \texttt{Type\ A1} Behavior pattern subjects are reference group,
+So, we can say, since \texttt{Type\ A1} Behavior pattern subjects are reference group,
 
 \begin{itemize}
 \tightlist
@@ -517,8 +514,10 @@ Since \texttt{Type\ A1} Behavior pattern subjects are reference group,
   Mean cholesterol level of \texttt{Type\ B4} subjects is -13.12 unit lower than that of \texttt{Type\ A1} subjects.
 \end{itemize}
 
-\hypertarget{answer-to-ques-07}{%
-\section{Answer To Ques 07}\label{answer-to-ques-07}}
+\hypertarget{question-07}{%
+\subsection{Question 07}\label{question-07}}
+
+\textbf{Answer:}
 
 \begin{table}[H]
 
@@ -528,8 +527,8 @@ Since \texttt{Type\ A1} Behavior pattern subjects are reference group,
 \toprule
 term & estimate & std.error & statistic & p.value\\
 \midrule
-(Intercept) & 200.191 & 6.637 & 30.163 & $<.001$\\
-age & 0.600 & 0.140 & 4.302 & $<.001$\\
+(Intercept) & 200.191 & 6.637 & 30.163 & <.001\\
+age & 0.600 & 0.140 & 4.302 & <.001\\
 dibpatType B & -3.469 & 1.550 & -2.238 & 0.025\\
 \bottomrule
 \end{tabular}
@@ -543,9 +542,6 @@ The fitted regression line is:
 \operatorname{\widehat{chol}} &= 200.19 + 0.6(\operatorname{age}) - 3.47(\operatorname{dibpat}_{\operatorname{Type\ B}})
 \end{aligned}
 \end{equation}
-
-\underline{\texttt{Interpretation of regression coefficients:}}
-
 Since \texttt{Type\ A1} subjects are reference group,
 
 \begin{itemize}
@@ -560,8 +556,10 @@ Since \texttt{Type\ A1} subjects are reference group,
 
 Here, Both the regression coefficients corresponding to age and dibpat (Eq \ref{eq: eq4}) have changed from the case of simple linear regression in Eq \ref{eq: eq1} and Eq \ref{eq: eq2}. And also the value of \(R^2_{adj}\) increased.
 
-\hypertarget{answer-to-ques-08}{%
-\section{Answer To Ques 08}\label{answer-to-ques-08}}
+\hypertarget{question-08}{%
+\subsection{Question 08}\label{question-08}}
+
+\textbf{Answer:}
 
 \begin{table}[H]
 
@@ -571,8 +569,8 @@ Here, Both the regression coefficients corresponding to age and dibpat (Eq \ref{
 \toprule
 term & estimate & std.error & statistic & p.value\\
 \midrule
-(Intercept) & 222.252 & 1.171 & 189.755 & $<.001$\\
-age40 & 0.632 & 0.139 & 4.550 & $<.001$\\
+(Intercept) & 222.252 & 1.171 & 189.755 & <.001\\
+age40 & 0.632 & 0.139 & 4.550 & <.001\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -586,8 +584,6 @@ The new fitted model after subtracting 40 from the variable \texttt{age} is:
 \end{aligned}
 \end{equation}
 
-\underline{\texttt{Interpretation of regression coefficients:}}
-
 \begin{itemize}
 \tightlist
 \item
@@ -598,8 +594,10 @@ The new fitted model after subtracting 40 from the variable \texttt{age} is:
 
 The main difference of this model (Eq \ref{eq: eq1}) compared to model \ref{eq: eq5} is that, we can interpret the intercept term for this model logically.
 
-\hypertarget{answer-to-ques-09}{%
-\section{Answer To Ques 09}\label{answer-to-ques-09}}
+\hypertarget{question-09}{%
+\subsection{Question 09}\label{question-09}}
+
+\textbf{Answer:}
 
 \begin{table}[H]
 
@@ -609,9 +607,9 @@ The main difference of this model (Eq \ref{eq: eq1}) compared to model \ref{eq: 
 \toprule
 term & estimate & std.error & statistic & p.value\\
 \midrule
-(Intercept) & 223.702 & 1.597 & 140.043 & $<.001$\\
+(Intercept) & 223.702 & 1.597 & 140.043 & <.001\\
 dibpatType B & -3.644 & 2.175 & -1.675 & 0.094\\
-smokeYes & 8.728 & 2.189 & 3.988 & $<.001$\\
+smokeYes & 8.728 & 2.189 & 3.988 & <.001\\
 dibpatType B:smokeYes & 0.265 & 3.085 & 0.086 & 0.932\\
 \bottomrule
 \end{tabular}
@@ -625,8 +623,6 @@ In this case, the fitted model is:
 \operatorname{\widehat{chol}} &= 223.7 - 3.64(\operatorname{dibpat}_{\operatorname{Type\ B}}) + 8.73(\operatorname{smoke}_{\operatorname{Yes}}) + 0.27(\operatorname{dibpat}_{\operatorname{Type\ B}} \times \operatorname{smoke}_{\operatorname{Yes}})
 \end{aligned}
 \end{equation}
-
-\underline{\texttt{Interpretation of regression coefficients:}}
 
 Here the reference groups are \texttt{Non-smoker} and dibpat \texttt{Type\ A} subjects. So,
 
@@ -681,12 +677,11 @@ Here the reference groups are \texttt{Non-smoker} and dibpat \texttt{Type\ A} su
                \AttributeTok{format =} \StringTok{"latex"}\NormalTok{,}
                \AttributeTok{booktabs =} \ConstantTok{TRUE}\NormalTok{,}
                \AttributeTok{digits =} \DecValTok{3}\NormalTok{,}
-               \AttributeTok{escape =} \ConstantTok{FALSE}\NormalTok{,}
 \NormalTok{               ...)}
 \NormalTok{\}}
 
 \NormalTok{p\_format }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(pval) \{}
-  \FunctionTok{ifelse}\NormalTok{(pval }\SpecialCharTok{\textless{}}\NormalTok{ .}\DecValTok{001}\NormalTok{, }\StringTok{"$\textless{}.001$"}\NormalTok{, }\FunctionTok{as.character}\NormalTok{(}\FunctionTok{round}\NormalTok{(pval, }\DecValTok{3}\NormalTok{)))}
+  \FunctionTok{ifelse}\NormalTok{(pval }\SpecialCharTok{\textless{}}\NormalTok{ .}\DecValTok{001}\NormalTok{, }\StringTok{"\textless{}.001"}\NormalTok{, }\FunctionTok{as.character}\NormalTok{(}\FunctionTok{round}\NormalTok{(pval, }\DecValTok{3}\NormalTok{)))}
 \NormalTok{\}}
 
 \NormalTok{mod\_tab }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(mod, ...) \{}
@@ -785,7 +780,6 @@ Here the reference groups are \texttt{Non-smoker} and dibpat \texttt{Type\ A} su
 \StringTok{    }\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{end\{minipage\}}
 \StringTok{      }\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{end\{table\}"}
 \NormalTok{  )}
-
 
 \DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-} Code for Question{-}04 {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
 

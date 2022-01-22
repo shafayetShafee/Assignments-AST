@@ -1,0 +1,14 @@
+\contentsline {section}{Answers to Questions}{2}{section*.2}%
+\contentsline {subsection}{Question 01}{2}{section*.3}%
+\contentsline {subsection}{Question 02}{3}{section*.4}%
+\contentsline {paragraph}{Effect of age and bmi}{3}{section*.5}%
+\contentsline {paragraph}{Effect of arcus}{3}{section*.6}%
+\contentsline {paragraph}{Effect of behpat}{4}{section*.7}%
+\contentsline {subsection}{Question 03}{5}{section*.8}%
+\contentsline {subsection}{Question 04}{6}{section*.9}%
+\contentsline {subsection}{Question 05}{6}{section*.10}%
+\contentsline {subsection}{Question 06}{6}{section*.11}%
+\contentsline {subsection}{Question 07}{7}{section*.12}%
+\contentsline {subsection}{Question 08}{8}{section*.13}%
+\contentsline {subsection}{Question 09}{8}{section*.14}%
+\contentsline {section}{R-code}{10}{section*.15}%

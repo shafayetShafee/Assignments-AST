@@ -14,7 +14,7 @@ output:
     fig_height : 5
     fig_width : 8
     includes:
-      # in_header: ../tex_files/import.sty
+      # in_header: ../tex_files/import.sty 
       before_body: ../tex_files/title.sty
 documentclass: article
 classoption: oneside
@@ -62,7 +62,6 @@ kab_tab <- function(tab, ...) {
                format = "latex",
                booktabs = TRUE,
                digits = 3,
-               escape = FALSE,
                ...)
 }
 
@@ -94,9 +93,9 @@ params <- function(mod, param, dec = 2) {
 
 ```
 
-# Answer To Ques 01
-
-For the continuous variables `age` and `bmi`, mean and standard deviation (SD) is obtained. And for categorical variable `arcus`, `behpat` and `chd69`, frequency and proportion (in percentage) is obtained as descriptive statistics, which are shown in the following table:
+# Answers to Questions
+## Question 01
+**Answer:** For the continuous variables `age` and `bmi`, mean and standard deviation (SD) is obtained. And for categorical variable `arcus`, `behpat`, and `chd69` frequency and proportion (in percentage) is obtained as descriptive statistics, which are shown in the following table:
 
 ```{r Table-01}
 
@@ -118,9 +117,10 @@ kab_tab(tab_p, caption = "Descriptive Statistics") %>%
 
 \clearpage
 
-# Answer To Ques 02
+## Question 02
+**Answer:** 
 
-#### Effect of age and bmi : 
+#### Effect of age and bmi
 To check whether each of `age` and `bmi` has significant effect on `chol`, we need to do correlation test (pearson).
 
 For each correlation test of `age` and `bmi` with `chol`, the hypotheses are,
@@ -141,7 +141,8 @@ distribution under $H_o$.
 
 Here we will reject $H_o$ if the associated `p.value` is less then  $\alpha = 0.05$, where $\alpha$ is the level of significance.
 
-Now from Table: \@ref(tab:Table-02), we can see that both of the variables `age` and `bmi` is significantly associated with `chol` variable.
+Now from Table: \@ref(tab:Table-02), we can see that both of the variables `age` and `bmi`
+is significantly associated with `chol` variable.
 
 ```{r Table-02}
 
@@ -168,7 +169,7 @@ mydat %>%
 #### Effect of arcus
 Now to check the effect of `arcus` (a categorical variable with level 0 and 1) on `chol`, we can do two sample t-test, where one sample is people with `arcus` 0 and 
 other sample is people with `arcus` 1. Therefore, is $\mu_o$ and $\mu_1$ are the 
-population mean of `arcus` 0 and `arcus` 1 group respectively. 
+population mean of arcus 0 and arcus 1 group respectively. 
 
 Then our hypotheses are:
 \begin{align*}
@@ -188,7 +189,8 @@ Here we will reject $H_o$ if the associated `p value` is less then  $\alpha = 0.
 
 Then from Table: \@ref(tab:Table-02), since `p.value` is less than 0.001 we can conclude that mean `chol` differs significantly for 0 and 1 group of `arcus`, that is, `arcus` has significant effect on `chol`.
 
-#### Effect of behpat:
+#### Effect of behpat
+
 To check the effect of `behpat` on `chol`, we can do oneway ANOVA. In this case the hypotheses are:
 \begin{align*}
 H_o&: \mu_1 = \mu_2 \\
@@ -211,9 +213,9 @@ Then from Table: \@ref(tab:Table-03), we conclude that mean `chol` differs signi
 
 \clearpage
 
-# Answer To Ques 03
+## Question 03
 
-To examine the association between `behat`  and `chd69`, the hypotheses are:
+**Answer:** To examine the association between `behat`  and `chd69`, the hypotheses are:
 \begin{align*}
 H_o&: \text{There's no association between \texttt{behpat} and \texttt{chd69}.} \\
 H_a&: \text{There's association between \texttt{behpat} and \texttt{chd69}.}
@@ -260,7 +262,6 @@ tab_side <- c(
     \\end{minipage}
       \\end{table}"
   )
-
 ```
 
 `r paste0(tab_side, collapse="")`
@@ -269,8 +270,8 @@ Now from the Table \ref{Table-05}, since `p.value` is less than 0.001, we can co
 
 \clearpage
 
-# Answer To Ques 04
-
+## Question 04
+**Answer:** 
 ```{r Table-06}
 
 ## ------- Code for Question-04 ------------------------
@@ -284,15 +285,12 @@ The fitted regression line is:
 ```{r eq01}
 reg_eq(m1, 1)
 ```
-
-\underline{\texttt{Interpretation of regression coefficients:}}
-
-The cholesterol level is expected to increase by `r params(m1, 2)` units
+Then, the cholesterol level is expected to increase by `r params(m1, 2)` units
 for 1-year increase of age.
 
 
-# Answer To Ques 05
-
+## Question 05
+**Answer:** 
 ```{r Table-07}
 
 ## ------- Code for Question-05 ------------------------
@@ -306,15 +304,11 @@ The fitted regression line is:
 ```{r eq02}
 reg_eq(m2, 2)
 ```
-
-\underline{\texttt{Interpretation of regression coefficients:}}
-
-* Mean cholesterol level of `Type A dibpat` subjects is `r params(m2, 1)`.
-* Also, mean cholesterol level of `Type A dibpat` subjects is `r -params(m2, 2)` unit higher than `Type B dibpat` subjects.
+So, we can say that, Mean cholesterol level of `Type A dibpat` subjects is `r params(m2, 1)`. Also, mean cholesterol level of `Type A dibpat` subjects is `r -params(m2, 2)` unit higher than `Type B dibpat` subjects.
 
 
-# Answer To Ques 06
-
+## Question 06
+**Answer:** 
 ```{r Table-08}
 
 ## ------- Code for Question-05 ------------------------
@@ -323,15 +317,12 @@ m3 <- lm(chol ~ behpat, data = mydat)
 m3 %>% mod_tab()
 
 ```
-
 The fitted regression line is:
+
 ```{r eq03}
 reg_eq(m3, 3)
 ```
-
-\underline{\texttt{Interpretation of regression coefficients:}}
-
-Since `Type A1` Behavior pattern subjects are reference group,
+So, we can say, since `Type A1` Behavior pattern subjects are reference group,
 
 * Mean cholesterol level of `Type A1` subjects is `r params(m3, 1)` unit.
 * Mean cholesterol level of `Type A2` subjects is `r params(m3, 2)` unit         lower than that of `Type A1` subjects.
@@ -339,8 +330,8 @@ Since `Type A1` Behavior pattern subjects are reference group,
 * Mean cholesterol level of `Type B4` subjects is `r params(m3, 4)` unit         lower than that of `Type A1` subjects.
 
 
-# Answer To Ques 07
-
+## Question 07
+**Answer:** 
 ```{r Table-09}
 
 ## ------- Code for Question-08 ------------------------
@@ -349,14 +340,11 @@ m4 <- lm(chol ~ age + dibpat, data = mydat)
 m4 %>% mod_tab()
 
 ```
-
 The fitted regression line is:
+
 ```{r eq04}
 reg_eq(m4, 4)
 ```
-
-\underline{\texttt{Interpretation of regression coefficients:}}
-
 Since `Type A1` subjects are reference group,
 
 * Mean cholesterol level of subjects with age 0 and `Type A` pattern is `r   params(m4, 1)` unit.
@@ -366,8 +354,8 @@ Since `Type A1` subjects are reference group,
 Here, Both the regression coefficients corresponding to age and dibpat (Eq \ref{eq: eq4}) have changed from the case of simple linear regression in Eq \ref{eq: eq1} and Eq \ref{eq: eq2}. And also the value of $R^2_{adj}$ increased.
 
 
-# Answer To Ques 08
-
+## Question 08
+**Answer:** 
 ```{r Table-10}
 
 ## ------- Code for Question-08 ------------------------
@@ -385,16 +373,13 @@ The new fitted model after subtracting 40 from the variable `age` is:
 reg_eq(m5, 5)
 ```
 
-\underline{\texttt{Interpretation of regression coefficients:}}
-
 * Since the explanatory variable is age minus 40, we can say, the mean cholesterol    level of a 40 year old subject is `r params(m5, 1)`.
 * Mean cholesterol level is expected to in increase by `r params(m5, 2)` for 1 year   increase of age.
 
 The main difference of this model (Eq \ref{eq: eq1}) compared to model \ref{eq: eq5} is that, we can interpret the intercept term for this model logically.
 
-
-# Answer To Ques 09
-
+## Question 09
+**Answer:** 
 ```{r Table-11}
 ## ------- Code for Question-08 ------------------------
 
@@ -406,8 +391,6 @@ In this case, the fitted model is:
 ```{r eq06}
 reg_eq(m6, 6)
 ```
-
-\underline{\texttt{Interpretation of regression coefficients:}}
 
 Here the reference groups are `Non-smoker` and dibpat `Type A` subjects. So,
 
@@ -422,4 +405,3 @@ Here the reference groups are `Non-smoker` and dibpat `Type A` subjects. So,
 ```{r show-code, ref.label=all_labels(), echo = TRUE, eval=FALSE}
 
 ```
-
