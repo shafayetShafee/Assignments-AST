@@ -1,0 +1,55 @@
+## Answer To Ques 03
+
+To examine the association between `behat`  and `chd69`, the hypotheses are:
+\begin{align*}
+H_o&: \text{There's no association between \texttt{behpat} and \texttt{chd69}.} \\
+H_a&: \text{There's association between \texttt{behpat} and \texttt{chd69}.}
+\end{align*}
+Here, the test statistics is:
+$$
+\chi^2 = \sum_{i=1}^{r}\sum_{j=1}^{c}\frac{(O_{ij} - E_{ij})^2}{E_{ij}}
+$$
+Where, $O_{ij}$ is observed frequency and $E_{ij}$ is the expected frequency and $r$, $c$ is the row and column number of contingency table \ref{Table-04}
+
+Here, we would reject $H_o$ if associated `p.value` corresponding to test statistics
+is less the 0.05.
+
+```{r Table-04-05}
+
+## ------- Code for Question-03 ------------------------
+
+df_cont <- mydat %>% janitor::tabyl(behpat, chd69)
+
+tab_cont <- df_cont %>%
+  kab_tab() %>%
+  add_header_above(header = c(" " = 1, "CHD" = 2))
+
+tab_chi <- df_cont %>%
+  janitor::chisq.test() %>%
+  tidy() %>%
+  select(statistic, p.value) %>%
+  mutate(p.value = p_format(p.value)) %>%
+  kab_tab()
+
+tab_side <- c(
+    "\\begin{table}[H]
+      \\begin{minipage}{.5\\linewidth}
+      \\centering",
+      tab_cont,
+      "\\caption{Contingency table}
+      \\label{Table-04}
+    \\end{minipage}%
+      \\begin{minipage}{.5\\linewidth}
+        \\centering",
+    tab_chi,
+    "\\caption{chi-square test}
+    \\label{Table-05}
+    \\end{minipage}
+      \\end{table}"
+  )
+
+```
+
+`r paste0(tab_side, collapse="")`
+
+Now from the Table \ref{Table-05}, since `p.value` is less than 0.001, we can conclude that there's an significant association between `behpat` and `chd69`.

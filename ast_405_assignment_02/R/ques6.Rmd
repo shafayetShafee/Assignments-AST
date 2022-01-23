@@ -1,0 +1,26 @@
+## Answer To Ques 06
+
+```{r Table-08}
+
+## ------- Code for Question-05 ------------------------
+
+m3 <- lm(chol ~ behpat, data = mydat)
+m3 %>% mod_tab()
+
+```
+
+The fitted regression line is:
+```{r eq03}
+reg_eq(m3, 3)
+```
+
+\underline{\texttt{Interpretation of regression coefficients:}}
+
+Since `Type A1` Behavior pattern subjects are reference group,
+
+* Mean cholesterol level of `Type A1` subjects is `r params(m3, 1)` unit.
+* Mean cholesterol level of `Type A2` subjects is `r params(m3, 2)` unit         lower than that of `Type A1` subjects.
+* Mean cholesterol level of `Type B3` subjects is `r params(m3, 3)` unit         lower than that of `Type A1` subjects.
+* Mean cholesterol level of `Type B4` subjects is `r params(m3, 4)` unit         lower than that of `Type A1` subjects.
+
+

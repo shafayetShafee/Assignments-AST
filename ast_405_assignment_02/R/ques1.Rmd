@@ -1,0 +1,23 @@
+## Answer To Ques 01
+For the continuous variables `age` and `bmi`, mean and standard deviation (SD) is obtained. And for categorical variable `arcus`, `behpat` and `chd69`, frequency and proportion (in percentage) is obtained as descriptive statistics, which are shown in the following table:
+
+```{r Table-01}
+
+## ------- Code for Question-01 ------------------------
+
+tab <- CreateTableOne(
+  data = mydat,
+  vars = c("age", "bmi", "arcus", "behpat", "chd69"),
+  factorVars = "arcus",
+  addOverall = TRUE
+)
+
+tab_p <- print(tab, showAllLevels = TRUE, printToggle = FALSE)
+
+kab_tab(tab_p,
+        caption = "Descriptive Statistics") %>%
+  kable_styling(latex_options = "hold_position")
+
+```
+
+

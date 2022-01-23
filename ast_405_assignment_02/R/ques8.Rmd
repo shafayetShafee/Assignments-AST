@@ -1,0 +1,25 @@
+## Answer To Ques 08
+
+```{r Table-10}
+
+## ------- Code for Question-08 ------------------------
+
+mydat %>%
+  mutate(age40 = age - 40) %>%
+  lm(chol ~ age40, data = .) -> m5
+
+m5 %>% mod_tab()
+
+```
+
+The new fitted model after subtracting 40 from the variable `age` is:
+```{r eq05}
+reg_eq(m5, 5)
+```
+
+\underline{\texttt{Interpretation of regression coefficients:}}
+
+* Since the explanatory variable is age minus 40, we can say, the mean cholesterol    level of a 40 year old subject is `r params(m5, 1)`.
+* Mean cholesterol level is expected to in increase by `r params(m5, 2)` for 1 year   increase of age.
+
+The main difference of this model (Eq \ref{eq: eq1}) compared to model \ref{eq: eq5} is that, we can interpret the intercept term for this model logically.

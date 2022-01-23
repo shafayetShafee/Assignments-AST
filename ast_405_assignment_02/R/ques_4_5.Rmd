@@ -1,0 +1,42 @@
+## Answer To Ques 04
+
+```{r Table-06}
+
+## ------- Code for Question-04 ------------------------
+
+m1 <- lm(chol ~ age, data = mydat)
+m1 %>% mod_tab()
+
+```
+
+The fitted regression line is:
+```{r eq01}
+reg_eq(m1, 1)
+```
+
+\underline{\texttt{Interpretation of regression coefficients:}}
+
+The cholesterol level is expected to increase by `r params(m1, 2)` units
+for 1-year increase of age.
+
+
+## Answer To Ques 05
+
+```{r Table-07}
+
+## ------- Code for Question-05 ------------------------
+
+m2 <- lm(chol ~ dibpat, data = mydat)
+m2 %>% mod_tab()
+
+```
+
+The fitted regression line is:
+```{r eq02}
+reg_eq(m2, 2)
+```
+
+\underline{\texttt{Interpretation of regression coefficients:}}
+
+* Mean cholesterol level of `Type A dibpat` subjects is `r params(m2, 1)`.
+* Also, mean cholesterol level of `Type A dibpat` subjects is `r -params(m2, 2)` unit higher than `Type B dibpat` subjects.

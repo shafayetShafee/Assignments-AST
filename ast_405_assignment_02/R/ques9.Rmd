@@ -1,0 +1,22 @@
+## Answer To Ques 09
+
+```{r Table-11}
+## ------- Code for Question-08 ------------------------
+
+m6 <- lm(chol ~ dibpat * smoke, data = mydat)
+m6 %>% mod_tab()
+```
+
+In this case, the fitted model is:
+```{r eq06}
+reg_eq(m6, 6)
+```
+
+\underline{\texttt{Interpretation of regression coefficients:}}
+
+Here the reference groups are `Non-smoker` and dibpat `Type A` subjects. So,
+
+* The mean cholesterol level of Type A non smoker subject is `r params(m6, 1)` unit.
+* Among the non-smokers, mean cholesterol level of dibpat `Type B` subjects is `r -params(m6, 2)` unit lower compared to `Type A` subject.
+* Among the `Type A` subjects, mean cholesterol level of smokers is `r params(m6, 3)` unit higher than that of non-smokers.
+* Difference of mean cholesterol level between smokers and non-smokers is `r params(m6, 4)` unit higher in `Type B` dibpat subjects compared to that of `Type A` dibpat subjects.
