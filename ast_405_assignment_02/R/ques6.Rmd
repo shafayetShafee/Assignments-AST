@@ -14,7 +14,7 @@ The fitted regression line is:
 reg_eq(m3, 3)
 ```
 
-\underline{\texttt{Interpretation of regression coefficients:}}
+\interpret
 
 Since `Type A1` Behavior pattern subjects are reference group,
 

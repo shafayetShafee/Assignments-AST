@@ -21,7 +21,6 @@ distribution under $H_o$.
 
 Here we will reject $H_o$ if the associated `p.value` is less then  $\alpha = 0.05$, where $\alpha$ is the level of significance.
 
-\clearpage
 
 Now from Table: \@ref(tab:Table-02), we can see that both of the variables `age` and `bmi` is significantly associated with `chol` variable.
 
@@ -47,7 +46,8 @@ mydat %>%
 
 ```
 
-#### Effect of arcus
+#### Effect of arcus:
+
 Now to check the effect of `arcus` (a categorical variable with level 0 and 1) on `chol`, we can do two sample t-test, where one sample is people with `arcus` 0 and 
 other sample is people with `arcus` 1. Therefore, is $\mu_o$ and $\mu_1$ are the 
 population mean of `arcus` 0 and `arcus` 1 group respectively. 
@@ -68,17 +68,17 @@ where $\bar{x}$ and $s^2$ denotes sample mean and sample variance with subscript
 
 Here we will reject $H_o$ if the associated `p value` is less then  $\alpha = 0.05$, where $\alpha$ is the level of significance.
 
-\clearpage
-
 Then from Table: \@ref(tab:Table-02), since `p.value` is less than 0.001 we can conclude that mean `chol` differs significantly for 0 and 1 group of `arcus`, that is, `arcus` has significant effect on `chol`.
 
 #### Effect of behpat:
+
 To check the effect of `behpat` on `chol`, we can do oneway ANOVA. In this case the hypotheses are:
 \begin{align*}
 H_o&: \mu_1 = \mu_2 \\
 H_a&: \mu_i \neq \mu_j \! &\text{for at least on i $\ne$ j}
 \end{align*}
 and test statistic is $F_o = \frac{MS_{reg}}{MS_{E}}$. We will reject $H_o$ if associated `p.value` is less than 0.05.
+
 
 ```{r Table-03}
 

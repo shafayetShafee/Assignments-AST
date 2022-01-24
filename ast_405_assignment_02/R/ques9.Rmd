@@ -12,7 +12,7 @@ In this case, the fitted model is:
 reg_eq(m6, 6)
 ```
 
-\underline{\texttt{Interpretation of regression coefficients:}}
+\interpret
 
 Here the reference groups are `Non-smoker` and dibpat `Type A` subjects. So,
 

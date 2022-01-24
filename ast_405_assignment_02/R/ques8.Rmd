@@ -17,7 +17,7 @@ The new fitted model after subtracting 40 from the variable `age` is:
 reg_eq(m5, 5)
 ```
 
-\underline{\texttt{Interpretation of regression coefficients:}}
+\interpret
 
 * Since the explanatory variable is age minus 40, we can say, the mean cholesterol    level of a 40 year old subject is `r params(m5, 1)`.
 * Mean cholesterol level is expected to in increase by `r params(m5, 2)` for 1 year   increase of age.

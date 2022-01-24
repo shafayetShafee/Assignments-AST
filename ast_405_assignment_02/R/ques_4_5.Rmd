@@ -10,11 +10,11 @@ m1 %>% mod_tab()
 ```
 
 The fitted regression line is:
-```{r eq01}
+```{r eq01, results="asis"}
 reg_eq(m1, 1)
 ```
 
-\underline{\texttt{Interpretation of regression coefficients:}}
+\interpret
 
 The cholesterol level is expected to increase by `r params(m1, 2)` units
 for 1-year increase of age.
@@ -32,11 +32,11 @@ m2 %>% mod_tab()
 ```
 
 The fitted regression line is:
-```{r eq02}
+```{r eq02, results="asis"}
 reg_eq(m2, 2)
 ```
 
-\underline{\texttt{Interpretation of regression coefficients:}}
+\interpret
 
 * Mean cholesterol level of `Type A dibpat` subjects is `r params(m2, 1)`.
 * Also, mean cholesterol level of `Type A dibpat` subjects is `r -params(m2, 2)` unit higher than `Type B dibpat` subjects.

@@ -14,13 +14,13 @@ The fitted regression line is:
 reg_eq(m4, 4)
 ```
 
-\underline{\texttt{Interpretation of regression coefficients:}}
+\interpret
 
 Since `Type A1` subjects are reference group,
 
 * Mean cholesterol level of subjects with age 0 and `Type A` pattern is `r   params(m4, 1)` unit.
 * Mean cholesterol level increases about `r params(m4, 2)` for 1-year increase    of age, holding dibpat fixed.
-* Mean cholesterol level of `Type B2` subjects is `r params(m4, 3)` unit lower than that of `Type A` dibpat subjects, holding the subject's age fixed.
+* Mean cholesterol level of `Type B2` subjects is `r -params(m4, 3)` unit lower than that of `Type A` dibpat subjects, holding the subject's age fixed.
 
 Here, Both the regression coefficients corresponding to age and dibpat (Eq \ref{eq: eq4}) have changed from the case of simple linear regression in Eq \ref{eq: eq1} and Eq \ref{eq: eq2}. And also the value of $R^2_{adj}$ increased.
 
